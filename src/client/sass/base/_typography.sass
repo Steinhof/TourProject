@@ -1,0 +1,41 @@
+// -----------------------------------------------------------------------------
+// This file contains all typography properties.
+// -----------------------------------------------------------------------------
+
+// Header__h1
+.heading-primary
+	color: #fff
+	text-transform: uppercase
+	backface-visibility: hidden
+
+	.heading-primary--main
+		font-weight: 400
+		@include responsive-font-size(5rem)
+		letter-spacing: 0.95rem
+		animation: moveInLeft 1s ease-out
+
+	.heading-primary--sub
+		display: block
+		font-weight: 700
+		@include responsive-font-size(1.3rem)
+		letter-spacing: 1rem
+		animation: moveInRight 1s ease-out
+
+
+
+.heading-secondary
+	@include responsive-font-size(3rem)
+	display: inline-block
+	color: transparent
+	font-weight: 700
+	letter-spacing: 0.2rem
+	text-transform: uppercase
+	background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark)
+	-webkit-background-clip: text
+	transition: all 0.2s
+
+	&:hover
+		text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2)
+		transform: skew(2deg, 15deg) scale(1.1)
+
+

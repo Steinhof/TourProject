@@ -1,0 +1,30 @@
+// -----------------------------------------------------------------------------
+// This file contains helping elements.
+// -----------------------------------------------------------------------------
+
+//Google placeholder animation (use @extend)
+%placeholder-animate
+	&:not(:placeholder-shown)
+		+ label
+			background-color: #ffffff
+			padding: 0 5px 0 5px
+			transform: translateY(-20px) translateX(1px) scale(0.9)
+	&:focus
+		border: 2px solid #1e90ff
+		outline: none
+		transition: all 0.1s ease
+		+ label
+			background-color: #ffffff
+			color: #1e90ff
+			padding: 0 5px 0 5px
+			transform: translateY(-20px) translateX(1px) scale(0.9)
+			transition: all .13s ease
+
+
+//Make image responsive
+.img-responsive
+	display: block
+	height: auto
+	max-width: 100%
+	&.img-width
+		width: 100%
