@@ -1,6 +1,8 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
+
+/* Main button style */
 .btn:link,
 .btn:visited
 	position: relative
@@ -32,6 +34,7 @@
 		transform: translateY(-1px)
 
 
+/* Header button white */
 .btn--white
 	@extend .btn
 	padding: 0.7vmax 2vmax
@@ -43,3 +46,28 @@
 
 	&::after
 		background-color: $color-white
+
+
+/* About section button */
+.btn--text
+	&:link,
+	&:visited
+		display: inline-block /* Button doesnt stretch */
+		padding: 3px
+		color: $color-primary
+		font-size: $default-font-size
+		text-decoration: none
+		border-bottom: 1px solid $color-primary
+		transition: all 0.2s
+
+	&:hover
+		color: $color-white
+		background-color: $color-primary
+		box-shadow: 0 1rem 2rem rgba($color-black, 0.15)
+		transform: translateY(-2px)
+
+	&:active
+		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15)
+		transform: translateY(0)
+
+

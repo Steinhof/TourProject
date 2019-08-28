@@ -485,7 +485,6 @@ html {
 
 body {
   position: relative;
-  display: flex;
   flex-direction: column;
   min-width: 320px;
   height: 100vh;
@@ -543,6 +542,19 @@ body {
     text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2);
     transform: skew(2deg, 15deg) scale(1.1); }
 
+.heading-tertiary {
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-transform: uppercase; }
+
+.paragraph {
+  font-size: 1.6rem; }
+  @media (max-width: 1200px) {
+    .paragraph {
+      font-size: calc(1.285rem + 0.42vw) ; } }
+  .paragraph:not(:last-child) {
+    margin-bottom: 3rem; }
+
 .visuallyHidden:not(:focus):not(:active) {
   position: absolute;
   width: 1px;
@@ -565,7 +577,7 @@ body {
   text-align: center; }
 
 .u-margin-bottom-8 {
-  margin-bottom: 8rem; }
+  margin-bottom: 10rem; }
 
 .slideDown {
   animation-name: slideDown;
@@ -622,17 +634,17 @@ body {
     transform: translate(0); } }
 
 .header {
-  position: relative;
   height: 95vh;
   background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.6), #28b485), url("../img/hero.jpg");
   background-position: top;
   background-size: cover;
   clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); }
 
-.header__logo-box {
+.header__logo-box img {
   margin: 2%; }
-  .header__logo-box .header__logo {
-    height: 4vh; }
+
+.header__logo {
+  height: 4vh; }
 
 .header__text-box {
   display: flex;
@@ -644,8 +656,7 @@ body {
 
 .row {
   max-width: 114rem;
-  margin: 0 auto;
-  background-color: #eee; }
+  margin: 0 auto; }
   .row:not(:last-child) {
     margin-bottom: 8rem; }
   .row::after {
@@ -670,9 +681,15 @@ body {
     width: calc((3 * (100% - 3 * 6rem) / 4) + 2 * 6rem); }
 
 .section-about {
+  margin-top: -25vh;
   padding: 25rem 0;
   background-color: #f7f7f7; }
 
+.section-about__heading-box {
+  margin-bottom: 5%;
+  text-align: center; }
+
+/* Main button style */
 .btn:link, .btn--white:link,
 .btn:visited,
 .btn--white:visited {
@@ -708,6 +725,7 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     transform: translateY(-1px); }
 
+/* Header button white */
 .btn--white {
   padding: 0.7vmax 2vmax;
   color: #777;
@@ -720,6 +738,50 @@ body {
       font-size: calc(1.255rem + 0.06vw) ; } }
   .btn--white::after {
     background-color: #fff; }
+
+/* About section button */
+.btn--text:link, .btn--text:visited {
+  display: inline-block;
+  padding: 3px;
+  color: #7ed56f;
+  font-size: 1.6rem;
+  text-decoration: none;
+  border-bottom: 1px solid #7ed56f;
+  transition: all 0.2s; }
+
+.btn--text:hover {
+  color: #fff;
+  background-color: #7ed56f;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px); }
+
+.btn--text:active {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transform: translateY(0); }
+
+.composition {
+  position: relative; }
+  .composition img {
+    position: absolute;
+    z-index: 1;
+    width: 55%;
+    border-radius: 2px;
+    outline-offset: 2rem;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.4);
+    transition: all 0.2s; }
+    .composition img:hover {
+      z-index: 10;
+      outline: 1.5rem solid #28b485;
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.5);
+      transform: scale(1.05) translateY(-0.5rem); }
+  .composition:hover img:not(:hover) {
+    transform: scale(0.95); }
+  .composition .composition__photo--p2 {
+    top: 3vh;
+    right: 0; }
+  .composition .composition__photo--p3 {
+    top: 10vh;
+    left: 10vh; }
 
 .img-responsive {
   display: block;

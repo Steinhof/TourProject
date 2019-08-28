@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
+const htmlInjector = require('bs-html-injector');
 const notify = require('gulp-notify');
 const sass = require('gulp-sass');
 const cache = require('gulp-cached');
@@ -8,10 +9,11 @@ const webpack = require('webpack');
 // File paths
 const settings = require('./config/gulp.settings');
 
-// Error handler
-
 // Static server
 gulp.task('BROWSER-SYNC', () => {
+    browserSync.use(htmlInjector, {
+        files: `${settings.browserSyncDir}/*.html`,
+    });
     browserSync.init({
         server: {
             baseDir: settings.browserSyncDir,
@@ -81,7 +83,7 @@ gulp.task('WATCH', () => {
     // gulp.watch(settings.wasm.input, gulp.series('WASM'));
     gulp.watch(settings.watch.indexFile, { usePolling: true }).on(
         'change',
-        browserSync.reload,
+        htmlInjector,
     );
 });
 
