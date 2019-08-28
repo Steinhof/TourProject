@@ -25,7 +25,11 @@ module.exports = {
                 return;
             }
             // Result (you can choose stats preset)
-            console.log(`Webpack finished:`, stats.toString('minimal'));
+            console.log(
+                `Webpack: ${stats.toString(
+                    'minimal',
+                )} -- ${new Date().toLocaleTimeString()}`,
+            );
         },
     },
     wasm: {
