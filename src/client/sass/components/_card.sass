@@ -1,0 +1,141 @@
+// -----------------------------------------------------------------------------
+// CARD COMPONENT
+// -----------------------------------------------------------------------------
+
+/* Card functionality */
+.section-tours__card-box
+	display: grid
+	grid-auto-rows: minmax(57vh, auto)
+	grid-template-columns: repeat(auto-fit, 34vh)
+	justify-content: space-around
+
+
+.card-container
+	height: 52rem
+	transform-style: preserve-3d
+	perspective: 150rem
+	transition: all 0.9s ease
+
+	&:hover
+		transform: rotateY(180deg)
+
+
+.card--front,
+.card--back
+	position: absolute
+	top: 0
+	width: 100%
+	height: inherit
+	font-size: 2rem
+	border-bottom-right-radius: 10px
+	border-bottom-left-radius: 10px
+	box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15)
+	backface-visibility: hidden
+
+
+.card--back
+	transform: rotateY(180deg)
+
+.card--back-sea
+	@extend .card--back
+	background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark)
+
+.card--back-forest
+	@extend .card--back
+	background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark)
+
+.card--back-snow
+	@extend .card--back
+	background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark)
+
+
+
+/* Card elements */
+.card__heading-box
+	height: 23rem
+	background-size: cover
+	border-top-left-radius: 10px
+	border-top-right-radius: 10px
+	clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%)
+
+
+.card__heading-box--sea
+	@extend .card__heading-box
+	background-image: url("../img/nat-5.jpg")
+
+.card__heading-box--forest
+	@extend .card__heading-box
+	background-image: url("../img/nat-6.jpg")
+
+.card__heading-box--snow
+	@extend .card__heading-box
+	background-image: url("../img/nat-7.jpg")
+
+
+.card__heading
+	position: absolute
+	margin: -30% 5% 0 15%
+	color: $color-white
+	font-weight: 300
+	font-size: 2.8rem
+	text-align: right
+	text-transform: uppercase
+
+
+.card__heading--primary
+	padding: 0.5rem 2.5rem
+	-webkit-box-decoration-break: clone
+	box-decoration-break: clone
+
+.card__heading--sea
+	@extend .card__heading--primary
+	background-image: linear-gradient(to right bottom, rgba($color-secondary-light, 0.85), rgba($color-secondary-dark, 0.85))
+
+.card__heading--forest
+	@extend .card__heading--primary
+	background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.85), rgba($color-primary-dark, 0.85))
+
+.card__heading--snow
+	@extend .card__heading--primary
+	background-image: linear-gradient(to right bottom, rgba($color-tertiary-light, 0.85), rgba($color-tertiary-dark, 0.85))
+
+
+
+.card__details__list
+	width: 80%
+	margin: 0 auto
+	padding: 10% 0 0 0
+	text-align: center
+	list-style-type: none
+
+	li
+		padding: 1rem
+		font-size: 1.5rem
+
+		&:not(:last-child)
+			border-bottom: 1px solid $color-grey-light-1
+
+
+.card__cta
+	position: absolute
+	top: 50%
+	left: 50%
+	text-align: center
+	transform: translate(-50%, -50%)
+
+.card__price-box
+	margin-bottom: 8rem
+	color: $color-white
+
+.card__price-only
+	margin: 0
+	font-size: 1.4rem
+	text-transform: uppercase
+
+.card__price-value
+	margin: 0
+	font-weight: 200
+	font-size: 6rem
+
+
+

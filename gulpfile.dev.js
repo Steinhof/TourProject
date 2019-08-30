@@ -91,7 +91,6 @@ gulp.task(
     'default',
     gulp.series(
         gulp.parallel(
-            // 'START-SERVER',
             'BROWSER-SYNC',
             'STYLES',
             'WEBPACK',

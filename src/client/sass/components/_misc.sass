@@ -1,30 +1,37 @@
 // -----------------------------------------------------------------------------
-// This file contains helping elements.
+// This file contains misc elements.
 // -----------------------------------------------------------------------------
 
 //Google placeholder animation (use @extend)
+
 %placeholder-animate
+
 	&:not(:placeholder-shown)
+
 		+ label
-			background-color: #ffffff
-			padding: 0 5px 0 5px
+			padding: 0 0.5rem
+			background-color: #fff
 			transform: translateY(-20px) translateX(1px) scale(0.9)
+
 	&:focus
-		border: 2px solid #1e90ff
+		border: 2px solid #1b8fff
 		outline: none
 		transition: all 0.1s ease
+
 		+ label
-			background-color: #ffffff
+			padding: 0 0.5rem
 			color: #1e90ff
-			padding: 0 5px 0 5px
-			transform: translateY(-20px) translateX(1px) scale(0.9)
-			transition: all .13s ease
+			background-color: #fff
+			transform: translateY(-2rem) translateX(1px) scale(0.9)
+			transition: all 0.13s ease
 
 
 //Make image responsive
+
 .img-responsive
 	display: block
-	height: auto
 	max-width: 100%
+	height: auto
+
 	&.img-width
 		width: 100%

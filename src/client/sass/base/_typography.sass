@@ -8,22 +8,22 @@
 	text-transform: uppercase
 	backface-visibility: hidden
 
-	.heading-primary--main
-		font-weight: 400
-		@include responsive-font-size(5rem)
-		letter-spacing: 0.95rem
-		animation: moveInLeft 1s ease-out
+.heading-primary--main
+	font-weight: 400
+	@include font-size(5rem)
+	letter-spacing: 0.95rem
+	animation: moveInLeft 1s ease-out
 
-	.heading-primary--sub
-		display: block
-		font-weight: 700
-		@include responsive-font-size(1.3rem)
-		letter-spacing: 1rem
-		animation: moveInRight 1s ease-out
+.heading-primary--sub
+	display: block
+	font-weight: 700
+	@include font-size(1.3rem)
+	letter-spacing: 1rem
+	animation: moveInRight 1s ease-out
 
 
 .heading-secondary
-	@include responsive-font-size(3rem)
+	@include font-size(3rem)
 	display: inline-block
 	color: transparent
 	font-weight: 700
@@ -35,7 +35,6 @@
 
 	&:hover
 		text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2)
-		transform: skew(2deg, 15deg) scale(1.1)
 
 
 .heading-tertiary
@@ -43,8 +42,9 @@
 	font-size: 1.6rem
 	text-transform: uppercase
 
+
 .paragraph
-	@include responsive-font-size(1.6rem)
+	@include font-size(1.6rem)
 
 	&:not(:last-child)
 		margin-bottom: 3rem

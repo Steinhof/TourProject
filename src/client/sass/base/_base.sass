@@ -1,6 +1,7 @@
 // -----------------------------------------------------------------------------
-// This file contains very basic styles.
+// BASIC STYLES
 // -----------------------------------------------------------------------------
+
 html
 	// This defines what 1 rem is
 	font-size: 62.5%
@@ -10,19 +11,22 @@ body
 	//display: flex
 	flex-direction: column
 	min-width: 320px
-	height: 100vh
+	min-height: 100vh
 	padding: 3rem
 	overflow-x: hidden
 	font-family: $default-font
 	line-height: 1.65
+	word-wrap: break-word
+	text-rendering: optimizeLegibility
 
-	input,
-	textarea
-		border: #666 1px solid
-		outline: none
+input,
+textarea
+	border: #666 1px solid
+	outline: none
 
-		&:focus:required:invalid
-			border-color: #f00
+	&:required:valid
+		border-color: #008000
 
-		&:required:valid
-			border-color: #008000
+	&:focus:required:invalid
+		border-color: #f00
+

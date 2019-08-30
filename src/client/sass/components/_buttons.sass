@@ -3,11 +3,12 @@
 // -----------------------------------------------------------------------------
 
 /* Main button style */
-.btn:link,
-.btn:visited
+.btn
 	position: relative
 	text-transform: uppercase
 	text-decoration: none
+	border: 0
+	border-radius: 10em
 	transition: all 0.2s
 
 	&::after
@@ -19,7 +20,7 @@
 		height: 100%
 		border-radius: inherit
 		transition: all 0.4s
-		content: ''
+		content: ""
 
 	&:hover
 		box-shadow: 0 10px 20px rgba($color-black, 0.2)
@@ -37,12 +38,11 @@
 /* Header button white */
 .btn--white
 	@extend .btn
-	padding: 0.7vmax 2vmax
+	padding: 0.8vmax 2vmax
 	color: #777
 	background-color: #fff
-	@include responsive-font-size(1.3rem)
-	border-radius: 10em
 	animation: moveInBottom 0.5s ease-out 0.75s backwards
+	@include font-size(1.3rem)
 
 	&::after
 		background-color: $color-white
@@ -50,15 +50,13 @@
 
 /* About section button */
 .btn--text
-	&:link,
-	&:visited
-		display: inline-block /* Button doesnt stretch */
-		padding: 3px
-		color: $color-primary
-		font-size: $default-font-size
-		text-decoration: none
-		border-bottom: 1px solid $color-primary
-		transition: all 0.2s
+	display: inline-block /* Button doesnt stretch */
+	padding: 3px
+	color: $color-primary
+	font-size: $default-font-size
+	text-decoration: none
+	border-bottom: 1px solid $color-primary
+	transition: all 0.2s
 
 	&:hover
 		color: $color-white
@@ -70,4 +68,16 @@
 		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15)
 		transform: translateY(0)
 
+
+/* Tour buttons */
+.card__button
+	@extend .btn--white
+
+.btn--green
+	@extend .btn--white
+	color: $color-white
+	background-color: $color-primary-dark
+
+	&::after
+		background-color: $color-primary-dark
 

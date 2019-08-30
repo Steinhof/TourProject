@@ -1,6 +1,3 @@
-// import func from './tesss';
-//
-// func();
 //
 // function WASMModuleLoad(): void {
 //     const imports = {
