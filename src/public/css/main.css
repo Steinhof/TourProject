@@ -481,6 +481,11 @@ textarea,
   position: absolute; }
 
 /* Responsive font size */
+/* Px to Em */
+/* Px to Rem */
+/* Px to VW */
+/* Px to VH */
+/* More accurate responsive font size */
 /* @include calcFS(16px, 24px, 480px, 1280px, 18px -- fallback); */
 html {
   font-size: 62.5%; }
@@ -496,17 +501,6 @@ body {
   line-height: 1.65;
   word-wrap: break-word;
   text-rendering: optimizeLegibility; }
-
-input,
-textarea {
-  border: #666 1px solid;
-  outline: none; }
-  input:required:valid,
-  textarea:required:valid {
-    border-color: #008000; }
-  input:focus:required:invalid,
-  textarea:focus:required:invalid {
-    border-color: #f00; }
 
 .heading-primary {
   color: #fff;
@@ -561,24 +555,15 @@ textarea {
   .paragraph:not(:last-child) {
     margin-bottom: 3rem; }
 
-.visuallyHidden:not(:focus):not(:active) {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(100%); }
-
+/* Hide element while making it readable for screen readers */
+/* Hide text while making it readable for screen readers */
 .hide-text {
   padding: 0;
   overflow: hidden;
   white-space: nowrap;
   text-indent: 101%; }
 
+/* Center element */
 .u-center-text {
   text-align: center; }
 
@@ -686,6 +671,64 @@ textarea {
   .row .col-3-of-4 {
     width: calc((3 * (100% - 3 * 6rem) / 4) + 2 * 6rem); }
 
+/* Booking section form */
+.form__group {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 3rem;
+  border: 0; }
+
+.form__input {
+  width: 90%;
+  padding: 1.5rem 2rem;
+  font-size: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 2px;
+  outline: none; }
+  .form__input:focus {
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1); }
+  .form__input:required:valid {
+    border-color: #7ed56f; }
+  .form__input:required:focus:invalid {
+    border-color: #FF1A2C; }
+
+.form__label {
+  position: absolute;
+  bottom: 4.5rem;
+  left: 3rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+  transform: scale(1.3);
+  transition: all 0.5s ease; }
+
+.form__radio-group {
+  display: flex;
+  align-items: center; }
+
+.form__input--radio {
+  width: 4.8rem;
+  height: 4.8rem;
+  opacity: 0; }
+  .form__input--radio:checked + .form__label--radio::before {
+    background-position: -192px 0px; }
+
+.form__label--radio {
+  font-size: 1.6rem; }
+  .form__label--radio::before {
+    position: absolute;
+    top: 0;
+    width: 4.8rem;
+    height: 4.8rem;
+    margin-left: -4.85rem;
+    background: url("../img/sprites/icons.svg") no-repeat -240px 0px;
+    background-size: cover;
+    cursor: pointer;
+    content: ""; }
+
+/* Section about */
 .section-about {
   margin-top: -25vh;
   padding: 25rem 0;
@@ -695,6 +738,7 @@ textarea {
   margin-bottom: 5%;
   text-align: center; }
 
+/* Section features */
 .section-features {
   margin-top: -11rem;
   padding: 20rem 0;
@@ -703,9 +747,12 @@ textarea {
   .section-features > * {
     transform: skewY(7deg); }
 
+/* Section tours */
 .section-tours {
+  display: flex;
+  flex-direction: column;
   margin-top: -15vh;
-  padding: 25rem 0 55rem 0;
+  padding: 25rem 0 0 0;
   background-color: #f7f7f7; }
 
 .section-tours__heading-box {
@@ -713,8 +760,36 @@ textarea {
   text-align: center; }
 
 .section-tours__button-box {
-  display: table;
-  margin: 5% auto; }
+  align-self: center;
+  padding: 3%; }
+
+/* Section stories */
+.section-stories {
+  position: relative;
+  padding: 5rem; }
+
+.section-stories__heading-box {
+  margin-bottom: 5%;
+  text-align: center; }
+
+.section-stories__button-box {
+  text-align: center; }
+
+/* Section booking */
+.section-book {
+  padding: 15rem 0;
+  background-image: linear-gradient(to right bottom, #55c57a, #28b485); }
+
+.book {
+  height: 50rem;
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../img/nat-10.jpg);
+  background-size: 100%;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15); }
+
+.book__form {
+  width: 50%;
+  padding: 6rem; }
 
 /* Main button style */
 .btn, .btn--white, .card__button, .btn--green {
@@ -808,6 +883,21 @@ textarea {
 .composition__photo--p3 {
   top: 10vh;
   left: 10vh; }
+
+.section-stories__bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0.15; }
+
+.bg-video__content {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; }
 
 .section-features__feature-box {
   padding: 3rem;
@@ -961,9 +1051,56 @@ textarea {
   font-weight: 200;
   font-size: 6rem; }
 
+.story {
+  width: 75%;
+  margin: 0 auto;
+  padding: 6rem 6rem 6rem 9rem;
+  font-size: 1.6rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  transform: skewX(-12deg); }
+  .story > * {
+    transform: skewX(12deg); }
+  .story .story__shape {
+    float: left;
+    width: 15rem;
+    height: 15rem;
+    shape-outside: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%); }
+  .story .story__image {
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    transition: all 0.5s; }
+  .story .story__text {
+    transform: skewX(12deg); }
+  .story .story__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    font-size: 1.7rem;
+    text-align: center;
+    text-transform: uppercase;
+    transform: translate(-50%, 20%);
+    opacity: 0;
+    transition: all 0.5s; }
+  .story:hover .story__caption {
+    transform: translate(-50%, -50%);
+    opacity: 1; }
+  .story:hover .story__image {
+    transform: translateX(-4rem);
+    filter: blur(3px) brightness(80%); }
+
+/* Google placeholder animation (use @extend on input. First goes label tag then input */
+.form__input:not(:placeholder-shown) + label {
+  transform: translateY(-4rem) scale(1.3); }
+
+.form__input:focus + label {
+  transform: translateY(-4rem) scale(1.3); }
+
+/* Make image responsive */
 .img-responsive {
   display: block;
   max-width: 100%;
   height: auto; }
-  .img-responsive.img-width {
-    width: 100%; }

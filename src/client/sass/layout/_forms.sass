@@ -1,3 +1,77 @@
 // -----------------------------------------------------------------------------
-// This file contains all styles related to the site forms.
+// FORMS
 // -----------------------------------------------------------------------------
+
+/* Booking section form */
+.form__group
+	position: relative
+	display: flex
+	justify-content: space-around
+	padding-bottom: 3rem
+	border: 0
+
+
+.form__input
+	width: 90%
+	padding: 1.5rem 2rem
+	font-size: 1.5rem
+	background-color: rgba($color-white, 0.5)
+	border: 0
+	border-bottom: 3px solid transparent
+	border-radius: 2px
+	outline: none
+	@extend %placeholder-animate
+
+	&:focus
+		box-shadow: 0 1rem 2rem rgba($color-black, 0.1)
+
+	&:required:valid
+		border-color: $color-primary
+
+	&:required:focus:invalid
+		border-color: $color-warning
+
+.form__label
+	position: absolute
+	bottom: 4.5rem
+	left: 3rem
+	font-weight: 700
+	font-size: 1.2rem
+	transform: scale(1.3)
+	transition: all 0.5s ease
+
+
+.form__radio-group
+	display: flex
+	align-items: center
+
+.form__input--radio
+	width: 4.8rem
+	height: 4.8rem
+	opacity: 0
+
+	&:checked + .form__label--radio::before
+		background-position: -192px 0px
+
+.form__label--radio
+	font-size: $default-font-size
+
+	&::before
+		position: absolute
+		top: 0
+		width: 4.8rem
+		height: 4.8rem
+		margin-left: -4.85rem
+		background: url("../img/sprites/icons.svg") no-repeat -240px 0px
+		background-size: cover
+		cursor: pointer
+		content: ""
+
+
+
+
+
+
+
+
+

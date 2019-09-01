@@ -2,35 +2,31 @@
 // This file contains sass functions.
 // -----------------------------------------------------------------------------
 
-//Px to Em
-
+/* Px to Em */
 $browser-context: 16px
 @function em($pixels, $context: $browser-context)
 	@return ($pixels / $context) * 1em
 
 
-//Px to Rem
-
+/* Px to Rem */
 $browser-context: 16px
 @function rem($pixels, $context: $browser-context)
 	@return #{$pixels/$context}rem
 
 
-//Px to VW
-
+/* Px to VW */
 $vw-context: (1920 * 0.01) * 1px
 @function vw($target)
 	@return ($target / $vw-context) * 1vw
 
-//Px to VH
 
+/* Px to VH */
 $vh-context: (1080 * 0.01) * 1px
 @function vh($target)
 	@return ($target / $vh-context) * 1vh
 
 
-//More accurate responsive font size
-
+/* More accurate responsive font size */
 @function strip-unit($number)
 	@if type-of($number) == "number" and not unitless($number)
 		@return $number / ($number * 0 + 1)

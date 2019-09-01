@@ -87,7 +87,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet laborum nisi provident totam
                 voluptatibus.
             </p>
-            <a href="" class="btn--text">Learn More &rarr;</a>
+            <a href="#" role="button" class="btn--text">Learn More &rarr;</a>
         </div>
 
         <div class="col-1-of-2">
@@ -255,18 +255,96 @@
         </button>
     </div>
 
- </section>
+</section>
 
 <section class="section-stories">
-    <h2 class="heading-secondary">
-        We make people genuinely happy
-    </h2>
+    <div class="section-stories__bg-video">
+        <video class="bg-video__content" autoplay muted loop poster="img/video--poster.jpg">
+            <source src="img/video.mp4" type="video/mp4; codecs=av01.0.05M.08">
+            <source src="img/video.webm" type="video/webm">
+            Your browser is not supported!
+        </video>
+    </div>
+
+    <div class="section-stories__heading-box">
+        <h2 class="heading-secondary">We make people genuinely happy</h2>
+    </div>
 
     <div class="row">
         <div class="story">
+            <figure class="story__shape">
+                <img class="story__image" src="img/nat-8.jpg" alt="Person on a tour">
+                <figcaption class="story__caption">Jenna Stark</figcaption>
+            </figure>
+            <div class="story__text">
+                <h3 class="heading-tertiary">I had the best week ever with my family</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad atque corporis deserunt temporibus.
+                    Accusamus eligendi esse, est explicabo fugiat, in, ipsa laborum nihil omnis perferendis qui
+                    reiciendis reprehenderit vel veritatis?</p>
+            </div>
 
         </div>
     </div>
+    <div class="row">
+        <div class="story">
+            <figure class="story__shape">
+                <img class="story__image" src="img/nat-9.jpg" alt="Person on a tour">
+                <figcaption class="story__caption">Jack London</figcaption>
+            </figure>
+            <div class="story__text">
+                <h3 class="heading-tertiary">This says a lot about our society</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad atque corporis deserunt temporibus.
+                    Accusamus eligendi esse, est explicabo fugiat, in, ipsa laborum nihil omnis perferendis qui
+                    reiciendis reprehenderit vel veritatis?</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section-stories__button-box">
+        <a href="#" class="btn--text">Read all stories &rarr;</a>
+    </div>
+</section>
+
+<section class="section-book">
+
+    <div class="row">
+        <div class="book">
+            <div class="book__form">
+                <form action="#" class="form">
+
+                    <div class="section-stories__heading-box">
+                        <h2 class="heading-secondary">Start booking now</h2>
+                    </div>
+
+                    <fieldset class="form__group">
+                        <input class="form__input" type="text" id="name" placeholder="&nbsp;" required>
+                        <label class="form__label" for="name">Full name</label>
+                    </fieldset>
+
+                    <fieldset class="form__group">
+                        <input class="form__input" type="email" id="email" placeholder="&nbsp;" required>
+                        <label class="form__label" for="email">Email address</label>
+                    </fieldset>
+
+                    <div class="form__group">
+                        <div class="form__radio-group">
+                            <input class="form__input--radio" type="radio" id="small" name="size" required>
+                            <label class="form__label--radio" for="small">Large group tour</label>
+                        </div>
+
+                        <div class="form__radio-group">
+                            <input class="form__input--radio" type="radio" id="large" name="size" required>
+                            <label class="form__label--radio" for="large"> Large group tour</label>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
 </section>
 
 <!--    <section class="grid-test">-->
