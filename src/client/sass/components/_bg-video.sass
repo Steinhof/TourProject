@@ -2,7 +2,7 @@
 // BACKGROUND VIDEO
 // -----------------------------------------------------------------------------
 
-.section-stories__bg-video
+.bg-video
 	position: absolute
 	top: 0
 	left: 0
@@ -12,7 +12,19 @@
 	overflow: hidden
 	opacity: 0.15
 
+	+media('<phone')
+		background-image: url("/img/video--poster.png")
+		background-size: cover
+		background-repeat: no-repeat
+
+
 .bg-video__content
 	width: 100%
 	height: 100%
 	object-fit: cover
+
+	+media('ie11')
+		width: auto
+
+	+media('<phone')
+		display: none

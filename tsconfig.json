@@ -23,12 +23,13 @@
     "noEmit": true,
     "tsBuildInfoFile": "./",
     "incremental": true,
-    "target": "es2015",
+    "target": "es5",
     "module": "commonjs",
-    "sourceMap": true,
+    "sourceMap": false,
     "downlevelIteration": true,
     "allowJs": true,
-    "checkJs": false
+    "checkJs": false,
+    "lib": ["dom", "es5"]
   },
   "exclude": [
     "node_modules",

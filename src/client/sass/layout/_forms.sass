@@ -2,17 +2,29 @@
 // FORMS
 // -----------------------------------------------------------------------------
 
-/* Booking section form */
-.form__group
+// Booking section
+.book__form
+	width: 50%
+	padding: 6rem
+	+media('<desktop')
+		width: 60%
+	+media('<tablet')
+		width: 100%
+
+
+.form-group
 	position: relative
-	display: flex
-	justify-content: space-around
-	padding-bottom: 3rem
+	width: 90%
+	margin: 0
+	padding: 0 0 3rem 0
 	border: 0
 
+	+media('<tablet')
+		width: 100%
 
-.form__input
-	width: 90%
+
+.form-group__input
+	width: 100%
 	padding: 1.5rem 2rem
 	font-size: 1.5rem
 	background-color: rgba($color-white, 0.5)
@@ -20,7 +32,7 @@
 	border-bottom: 3px solid transparent
 	border-radius: 2px
 	outline: none
-	@extend %placeholder-animate
+	+placeholder-animate
 
 	&:focus
 		box-shadow: 0 1rem 2rem rgba($color-black, 0.1)
@@ -31,38 +43,46 @@
 	&:required:focus:invalid
 		border-color: $color-warning
 
-.form__label
+
+.form-group__label
 	position: absolute
 	bottom: 4.5rem
 	left: 3rem
-	font-weight: 700
+	font-weight: 300
 	font-size: 1.2rem
 	transform: scale(1.3)
 	transition: all 0.5s ease
 
 
-.form__radio-group
+.form-group__radio-group
 	display: flex
-	align-items: center
+	justify-content: space-around
 
-.form__input--radio
-	width: 4.8rem
-	height: 4.8rem
+
+.form-group__radio-box
+	display: flex
+
+
+.radio-box__input
+	width: 30px
+	height: 30px
 	opacity: 0
 
-	&:checked + .form__label--radio::before
-		background-position: -192px 0px
+	&:checked + .radio-box__label::before
+		background-position: -0px 0px
 
-.form__label--radio
+
+.radio-box__label
+	position: relative
 	font-size: $default-font-size
+	//line-height: 1.9
 
 	&::before
 		position: absolute
-		top: 0
-		width: 4.8rem
-		height: 4.8rem
-		margin-left: -4.85rem
-		background: url("../img/sprites/icons.svg") no-repeat -240px 0px
+		left: -30px
+		width: 30px
+		height: 30px
+		background: url("/img/sprites/radio-icons/radio-icons.svg") no-repeat -30px 0px
 		background-size: cover
 		cursor: pointer
 		content: ""

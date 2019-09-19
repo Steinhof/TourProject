@@ -1,6 +1,7 @@
 // -----------------------------------------------------------------------------
 // STORY COMPONENT
 // -----------------------------------------------------------------------------
+
 .story
 	width: 75%
 	margin: 0 auto
@@ -14,21 +15,41 @@
 	& > *
 		transform: skewX(12deg)
 
+	+media('<tablet')
+		width: 100%
+		padding: 1rem
+
+	+media('<phone')
+		transform: skewX(0)
 
 	.story__shape
 		float: left
 		width: 15rem
 		height: 15rem
-		shape-outside: circle(50% at 50% 50%)
-		clip-path: circle(50% at 50% 50%)
+		overflow: hidden
+		border-radius: 50%
+
+		@supports (clip-path: circle())
+			clip-path: circle(50% at 50% 50%)
+			shape-outside: circle(50% at 50% 50%)
+			border-radius: 0
+
+		+media('<phone')
+			transform: skewX(0)
+
 
 	.story__image
 		height: 100%
 		transform: translateX(-4rem) scale(1.4)
 		transition: all 0.5s
 
+
 	.story__text
 		transform: skewX(12deg)
+
+		+media('<tablet')
+			transform: translateX(0)
+
 
 	.story__caption
 		position: absolute
@@ -49,3 +70,5 @@
 	&:hover .story__image
 		transform: translateX(-4rem)
 		filter: blur(3px) brightness(80%)
+
+

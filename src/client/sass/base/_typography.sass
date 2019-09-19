@@ -1,37 +1,45 @@
 // -----------------------------------------------------------------------------
-// This file contains all typography properties.
+// TYPOGRAPHY
 // -----------------------------------------------------------------------------
 
-// Header__h1
 .heading-primary
+	overflow: hidden
 	color: #fff
 	text-transform: uppercase
 	backface-visibility: hidden
 
+
 .heading-primary--main
+	display: block
+	margin-right: -2.7rem /* Last char space fix */
 	font-weight: 400
-	@include font-size(5rem)
-	letter-spacing: 0.95rem
+	+font-size(4rem)
+	letter-spacing: 2.7rem
 	animation: moveInLeft 1s ease-out
+
 
 .heading-primary--sub
 	display: block
+	margin-right: -1rem /* Last char space fix */
 	font-weight: 700
-	@include font-size(1.3rem)
+	+font-size(1.4rem)
 	letter-spacing: 1rem
 	animation: moveInRight 1s ease-out
 
 
 .heading-secondary
-	@include font-size(3rem)
-	display: inline-block
-	color: transparent
+	display: block
+	color: $color-primary-dark
 	font-weight: 700
+	+font-size(2.7rem)
 	letter-spacing: 0.2rem
 	text-transform: uppercase
-	background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark)
-	-webkit-background-clip: text
 	transition: all 0.2s
+
+	@supports (-webkit-background-clip: text)
+		color: transparent
+		background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark)
+		-webkit-background-clip: text
 
 	&:hover
 		text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2)
@@ -39,13 +47,10 @@
 
 .heading-tertiary
 	font-weight: 700
-	font-size: 1.6rem
+	+font-size(1.6rem)
 	text-transform: uppercase
 
 
 .paragraph
-	@include font-size(1.6rem)
-
-	&:not(:last-child)
-		margin-bottom: 3rem
+	+font-size(1.6rem)
 

@@ -1,0 +1,51 @@
+// -----------------------------------------------------------------------------
+// ICONS
+// -----------------------------------------------------------------------------
+
+//Navigation
+.navigation__icon
+	display: flex
+	flex-direction: column
+	align-items: center
+	justify-content: space-around
+	width: 5rem
+	height: 5rem
+	padding: 1rem 0
+
+
+.burger-icon__part-1,
+.burger-icon__part-2,
+.burger-icon__part-3
+	position: relative
+	display: block
+	width: 2.6rem
+	height: 2px
+	background-color: $color-grey-dark-1
+	transition: all ease 0.4s
+
+
+// Features
+@mixin feature-box__icon
+	display: inline-block
+	width: 48px
+	height: 48px
+	margin-bottom: 0.5rem
+	background-size: cover
+	background: url("/img/sprites/feature-icons/feature-icons.svg")
+
+
+.feature-box__icon--world
+	+feature-box__icon
+	background-position: -144px 0
+
+.feature-box__icon--compass
+	+feature-box__icon
+	background-position: 0 0
+
+.feature-box__icon--map
+	+feature-box__icon
+	background-position: -48px 0
+
+.feature-box__icon--heart
+	+feature-box__icon
+	background-position: -96px 0

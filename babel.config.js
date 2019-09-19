@@ -8,9 +8,6 @@ module.exports = api => {
                 useBuiltIns: 'usage',
                 corejs: 3,
                 loose: true,
-                targets: {
-                    browsers: ['> 0.25%, not dead'],
-                },
             },
         ],
     ];

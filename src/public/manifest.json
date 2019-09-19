@@ -1,12 +1,12 @@
 {
   "lang": "EN",
-  "name": "My project",
-  "short_name": "project",
-  "description": "Here goes my my template",
+  "name": "Tour project",
+  "short_name": "Natours",
+  "description": "Explore amazing tours",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "theme_color": "#7ed56f",
+  "background_color": "#28b485",
   "orientation": "any",
   "icons": [
     {

@@ -1,6 +1,46 @@
 // -----------------------------------------------------------------------------
-// This file contains all styles related to the footer of the site/application.
+// FOOTER
 // -----------------------------------------------------------------------------
 
+.footer
+	display: flex
+	flex-direction: column
+	align-items: center
+	padding: 10rem 0
+	color: $color-grey-light-1
+	font-size: 1.4rem
+	background-color: $color-grey-dark-1
 
 
+
+.footer__logo-box
+	margin-bottom: 8rem
+	text-align: center
+
+.footer__navigation
+	padding: 2rem
+	border-top: 1px solid $color-grey-dark
+
+.footer__list
+	padding: 0
+
+.footer__item
+	display: inline-block
+
+	&:not(:last-child)
+		margin-right: 1.5rem
+
+
+.footer__link
+
+	&:link,
+	&:visited
+		color: $color-grey-light-1
+		text-transform: uppercase
+		text-decoration: none
+		transition: all 0.2s
+
+	&:hover,
+	&:active
+		color: $color-primary
+		box-shadow: 0 1rem 2rem rgba($color-black, 0.4)

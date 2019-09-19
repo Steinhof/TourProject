@@ -1,34 +1,38 @@
-// Vendors
-@import 'vendors/sanitize'
-@import '../../../node_modules/rfs/sass' /* Responsive font size */
-
-// Abstracts
-@import 'abstracts/mixins'
+/* ABSTRACTS */
 @import 'abstracts/variables'
+@import 'abstracts/mixins'
 @import 'abstracts/functions'
+@import 'abstracts/media'
 
-// Base
+/* VENDORS */
+@import '~include-media/dist/include-media'
+@import '~sanitize.css'
+@import '~rfs/sass' /* Responsive font size */
+
+/* BASE */
 @import 'base/base'
 @import 'base/fonts'
 @import 'base/typography'
-@import 'base/media'
 @import 'base/utils'
 @import 'base/animation'
+@import 'base/misc'
 
-// Layout
+/* LAYOUT */
 @import 'layout/header'
+@import 'layout/navigation'
 @import 'layout/grid'
 @import 'layout/footer'
 @import 'layout/forms'
 
-// Page
+/* PAGE */
 @import 'pages/home'
 
-// Components
+/* COMPONENTS */
+@import 'components/icons'
 @import 'components/buttons'
 @import 'components/composition'
 @import 'components/bg-video'
 @import 'components/feature'
 @import 'components/card'
 @import 'components/story'
-@import 'components/misc'
+@import 'components/popup'

@@ -1,82 +1,175 @@
 const gulp = require('gulp');
-const browserSync = require('browser-sync').create();
+const del = require('del');
+const fs = require('fs');
+const typedoc = require('gulp-typedoc');
 const critical = require('critical').stream;
-const csso = require('gulp-csso');
 const imagemin = require('gulp-imagemin');
-const notify = require('gulp-notify');
-const plumber = require('gulp-plumber');
-const rename = require('gulp-rename');
-const purgecss = require('gulp-purgecss');
-const gulpWebpack = require('webpack-stream');
-const sass = require('gulp-sass');
-const postcss = require('gulp-postcss');
-const postcssPresetEnv = require('postcss-preset-env');
+const webpack = require('webpack');
+const nodemon = require('gulp-nodemon');
 
-// Static server
-gulp.task('BROWSER-SYNC', () => {
-    browserSync.init({
-        server: {
-            baseDir: 'build',
+/* File paths */
+const cfg = require('./config/config');
+
+/* Delete old files */
+gulp.task('CLEAN', done => {
+    del([cfg.globs.distCss[0], cfg.globs.distJs[0]]);
+    done();
+});
+
+/* Start server */
+gulp.task('START-SERVER', done => {
+    let started = false;
+    nodemon({
+        script: cfg.files.server,
+        ext: 'ts',
+        args: ['--transpile-only', '--pretty'],
+        watch: [cfg.paths.src.base],
+        ignore: ['node_modules/'],
+        env: {
+            NODE_ENV: 'development',
+            // NODE_OPTIONS: '--inspect', // load Node.Js profiler
         },
-        notify: false,
+        scriptPosition: 2, // File name should be at the end
+    }).on('start', () => {
+        if (!started) {
+            done();
+            started = true;
+        }
+    });
+    done();
+});
+
+/* Webpack */
+gulp.task('WEBPACK', done => {
+    webpack(require(cfg.configs.webpack.build), function webpackErrorHandler(
+        err,
+        stats,
+    ) {
+        if (err) {
+            console.error(err.stack || err);
+            if (err.details) {
+                console.error(err.details);
+            }
+            return;
+        }
+        const statsConfig = {
+            all: false,
+            /* Show entries */
+            assets: true,
+            colors: true,
+            modules: false,
+            errors: true,
+            cachedAssets: true,
+            /* Stat logs */
+            warnings: true,
+            performance: true,
+            moduleTrace: true,
+            errorDetails: true,
+        };
+
+        // Result (you can choose stats preset)
+        console.log(
+            `${stats.toString(
+                statsConfig,
+            )} -- ${new Date().toLocaleTimeString()}`,
+        );
+        done();
     });
 });
 
-// CSS compiler
-gulp.task('STYLES', () =>
-    gulp
-        .src('app/build/sass/main.sass')
+gulp.task('SW', done => {
+    webpack(require(cfg.configs.webpack.sw), function webpackErrorHandler(
+        err,
+        stats,
+    ) {
+        if (err) {
+            console.error(err.stack || err);
+            if (err.details) {
+                console.error(err.details);
+            }
+            return;
+        }
+        const statsConfig = {
+            all: false,
+            /* Show entries */
+            assets: true,
+            colors: true,
+            modules: false,
+            errors: true,
+            cachedAssets: true,
+            /* Stat logs */
+            warnings: true,
+            performance: true,
+            moduleTrace: true,
+            errorDetails: true,
+        };
+
+        // Result (you can choose stats preset)
+        console.log(
+            `${stats.toString(
+                statsConfig,
+            )} -- ${new Date().toLocaleTimeString()}`,
+        );
+        done();
+    });
+});
+
+// WASM
+// gulp.task('WASM', done => {
+//     const asc = require('assemblyscript/cli/asc');
+//     asc.main(
+//         [
+//             settings.wasm.input,
+//             '--binaryFile',
+//             settings.wasm.output,
+//             '--optimize',
+//         ],
+//         {
+//             stdout: process.stdout,
+//             stderr: process.stderr,
+//         },
+//         err => {
+//             if (err) throw err;
+//         },
+//     );
+//     done();
+// });
+
+/* Generate & Inline Critical-path CSS */
+gulp.task('CRITICAL', done => {
+    const criticalWidthMobile = 375;
+    const criticalHeightMobile = 667;
+    const criticalWidthDesktop = 1376;
+    const criticalHeightDesktop = 768;
+    gulp.src(cfg.files.html)
         .pipe(
-            plumber({
-                errorHandler: notify.onError(err => ({
-                    title: 'Sass error',
-                    message: err.message,
-                })),
-            }),
-        )
-        .pipe(sass())
-        .pipe(
-            postcss([
-                postcssPresetEnv({
-                    stage: 0,
-                    autoprefixer: { grid: 'autoplace' },
-                    features: {
-                        'nesting-rules': true,
+            critical({
+                base: cfg.paths.public.base,
+                inline: true,
+                minify: true,
+                dimensions: [
+                    {
+                        width: criticalWidthMobile,
+                        height: criticalHeightMobile,
                     },
-                }),
-            ]),
-        )
-        .pipe(csso())
-        .pipe(rename('style.min.css'))
-        .pipe(
-            purgecss({
-                trim: true,
-                shorten: true,
-                content: ['app/build/index.html', 'app/build/js/main.min.js'],
-                css: ['app/build/css/style.min.css'],
+                    {
+                        width: criticalWidthDesktop,
+                        height: criticalHeightDesktop,
+                    },
+                ],
+                css: `${cfg.paths.public.css}${fs.readdirSync(
+                    './src/public/css/',
+                )}`,
             }),
         )
-        .pipe(gulp.dest('app/build/css'))
-        .pipe(
-            browserSync.reload({
-                stream: true,
-            }),
-        ),
-);
+        .pipe(gulp.dest(cfg.paths.public.base));
+    done();
+});
 
-// Webpack
-gulp.task('TS', () =>
-    gulp
-        .src('src/modules/**/*.ts')
-        .pipe(plumber())
-        .pipe(gulpWebpack(require('./webpack.build.config.js')))
-        .pipe(gulp.dest('app/build')),
-);
-
-// Image compress
+/* Compress images */
 gulp.task('IMAGEMIN', () =>
     gulp
-        .src('build/img/*')
+        .src(cfg.paths.public.img)
         .pipe(
             imagemin([
                 imagemin.gifsicle({ interlaced: true }),
@@ -87,59 +180,40 @@ gulp.task('IMAGEMIN', () =>
                 }),
             ]),
         )
-        .pipe(gulp.dest('build/img')),
+        .pipe(gulp.dest(cfg.paths.public.img)),
 );
 
-// Generate & Inline Critical-path CSS
-gulp.task('CRITICAL', () =>
-    gulp
-        .src('build/index.html')
-        .pipe(
-            critical({
-                base: 'app/',
-                inline: true,
-                minify: true,
-                dimensions: [
-                    {
-                        height: 375,
-                        width: 812,
-                    },
-                ],
-                css: 'build/css/style.min.css',
-            }),
-        )
-        .pipe(gulp.dest('app/build')),
-);
+/* Copy files to build folder */
+gulp.task('COPY', () => {
+    gulp.src(cfg.globs.src).pipe(gulp.dest(cfg.paths.dist.base));
+});
 
 // TypeDoc
 gulp.task('TYPEDOC', () =>
-    gulp.src([settings.typedoc.files]).pipe(
+    gulp.src(cfg.globs.distModules).pipe(
         typedoc({
             module: 'commonjs',
             exclude: '**/node_modules/**/*.*',
             target: 'es5',
             includeDeclarations: true,
-            // ignoreCompilerErrors: true,
-            // experimentalDecorators: true,
+            ignoreCompilerErrors: true,
+            experimentalDecorators: true,
             excludeExternals: true,
             version: true,
-            out: settings.typedoc.options.out,
-            name: settings.typedoc.options.name,
+            out: './',
+            name: 'My project',
         }),
     ),
 );
 
-// Watcher
-gulp.task('WATCH', () => {
-    gulp.watch('build/sass', gulp.series('STYLES'));
-    gulp.watch('build/modules').on('change', browserSync.reload);
-    gulp.watch('build/index.html').on('change', browserSync.reload);
-});
-
 gulp.task(
     'default',
     gulp.series(
-        gulp.parallel('STYLES'),
-        gulp.parallel('WATCH', 'BROWSER-SYNC', 'TS'),
+        'CLEAN',
+        'IMAGEMIN',
+        'START-SERVER',
+        'WEBPACK',
+        'SW',
+        'CRITICAL',
     ),
 );

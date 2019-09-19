@@ -1,0 +1,34 @@
+/* --------------------------------
+
+Generated using nucleoapp.com
+
+-------------------------------- */
+.icon {
+    display: inline-block;
+    background-image: url(../icons.svg);
+    background-repeat: no-repeat;
+}
+
+.icon.icon-compass-05 {
+    background-position: -0px 0px;
+    height: 48px;
+    width: 48px;
+}
+
+.icon.icon-ic_map_48px {
+    background-position: -48px 0px;
+    height: 48px;
+    width: 48px;
+}
+
+.icon.icon-heart-2 {
+    background-position: -96px 0px;
+    height: 48px;
+    width: 48px;
+}
+
+.icon.icon-world-2 {
+    background-position: -144px 0px;
+    height: 48px;
+    width: 48px;
+} 

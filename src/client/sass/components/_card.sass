@@ -2,16 +2,9 @@
 // CARD COMPONENT
 // -----------------------------------------------------------------------------
 
-/* Card functionality */
-.section-tours__card-box
-	display: grid
-	grid-auto-rows: minmax(57vh, auto)
-	grid-template-columns: repeat(auto-fit, 34vh)
-	justify-content: space-around
-
-
-.card-container
+.card
 	height: 52rem
+	font-size: 2rem
 	transform-style: preserve-3d
 	perspective: 150rem
 	transition: all 0.9s ease
@@ -20,91 +13,59 @@
 		transform: rotateY(180deg)
 
 
-.card--front,
-.card--back
+.card-front
 	position: absolute
-	top: 0
 	width: 100%
-	height: inherit
-	font-size: 2rem
-	border-bottom-right-radius: 10px
-	border-bottom-left-radius: 10px
+	height: 100%
+	overflow: hidden
+	border-radius: 10px
 	box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15)
 	backface-visibility: hidden
 
 
-.card--back
-	transform: rotateY(180deg)
-
-.card--back-sea
-	@extend .card--back
-	background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark)
-
-.card--back-forest
-	@extend .card--back
-	background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark)
-
-.card--back-snow
-	@extend .card--back
-	background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark)
+.card-front__bg-box
+	position: relative
 
 
-
-/* Card elements */
-.card__heading-box
-	height: 23rem
-	background-size: cover
+.card-front__img
+	width: 100%
+	object-fit: cover
+	object-position: top
 	border-top-left-radius: 10px
 	border-top-right-radius: 10px
 	clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%)
 
 
-.card__heading-box--sea
-	@extend .card__heading-box
-	background-image: url("../img/nat-5.jpg")
-
-.card__heading-box--forest
-	@extend .card__heading-box
-	background-image: url("../img/nat-6.jpg")
-
-.card__heading-box--snow
-	@extend .card__heading-box
-	background-image: url("../img/nat-7.jpg")
-
-
-.card__heading
+.card-front__heading
 	position: absolute
-	margin: -30% 5% 0 15%
+	right: 0
+	bottom: 0
+	margin: 0
 	color: $color-white
 	font-weight: 300
 	font-size: 2.8rem
 	text-align: right
 	text-transform: uppercase
 
+	span
+		padding: 0.5rem
 
-.card__heading--primary
-	padding: 0.5rem 2.5rem
-	-webkit-box-decoration-break: clone
-	box-decoration-break: clone
 
-.card__heading--sea
-	@extend .card__heading--primary
+.card-front__text-color--sea
 	background-image: linear-gradient(to right bottom, rgba($color-secondary-light, 0.85), rgba($color-secondary-dark, 0.85))
 
-.card__heading--forest
-	@extend .card__heading--primary
+
+.card-front__text-color--forest
 	background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.85), rgba($color-primary-dark, 0.85))
 
-.card__heading--snow
-	@extend .card__heading--primary
+
+.card-front__text-color--snow
 	background-image: linear-gradient(to right bottom, rgba($color-tertiary-light, 0.85), rgba($color-tertiary-dark, 0.85))
 
 
-
-.card__details__list
-	width: 80%
-	margin: 0 auto
-	padding: 10% 0 0 0
+.card-front__list
+	margin: 0 10%
+	padding: 5% 0
 	text-align: center
 	list-style-type: none
 
@@ -116,26 +77,135 @@
 			border-bottom: 1px solid $color-grey-light-1
 
 
-.card__cta
+/* Back of the card */
+.card-back
+	position: absolute
+	width: 100%
+	height: 100%
+	overflow: hidden
+	border-radius: 10px
+	box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15)
+	transform: rotateY(180deg)
+	backface-visibility: hidden
+
+
+.card-back__bg-color--sea
+	background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark)
+
+
+.card-back__bg-color--forest
+	background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark)
+
+
+.card-back__bg-color--snow
+	background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark)
+
+
+.card-back__cta
 	position: absolute
 	top: 50%
 	left: 50%
 	text-align: center
 	transform: translate(-50%, -50%)
 
-.card__price-box
+
+.card-back__price-box
 	margin-bottom: 8rem
 	color: $color-white
 
-.card__price-only
+
+.card-back__price--only
 	margin: 0
 	font-size: 1.4rem
 	text-transform: uppercase
 
-.card__price-value
+.card-back__price--value
 	margin: 0
 	font-weight: 200
 	font-size: 6rem
 
 
+//Mobile
+@media only screen and (max-width: 56.25em), only screen and (hover: none)
 
+	.card
+		height: auto
+
+		&:hover
+			transform: rotate(0)
+
+
+	.card-front
+		position: relative
+		border-radius: 3px
+
+
+	.card-front__list
+		padding: 2rem 0 6rem 0
+
+
+	.card-back
+		border-radius: 0
+		position: relative
+		margin-top: -5rem
+		transform: rotate(0)
+		clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%)
+
+
+	.card-back__cta
+		margin: 3rem 0
+		position: static
+		transform: translate(0)
+
+
+	.card-back__price-box
+		margin-bottom: 0
+
+
+	.card-back__price--value
+		padding-bottom: 2rem
+		font-size: 4rem
+
+
++media('ie11')
+
+	.card
+		height: 55rem
+		width: auto
+		margin-bottom: 18rem
+
+		&:hover
+			transform: rotate(0)
+
+
+	.card-front
+		position: relative
+		border-radius: 3px
+
+
+	.card-front__list
+		padding: 2rem 0 6rem 0
+
+
+	.card-back
+		height: 20rem
+		border-radius: 0
+		position: relative
+		margin-top: -5rem
+		transform: rotate(0)
+		clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%)
+
+
+	.card-back__cta
+		margin: 3rem 0
+		position: static
+		transform: translate(0)
+
+
+	.card-back__price-box
+		margin-bottom: 0
+
+
+	.card-back__price--value
+		padding-bottom: 2rem
+		font-size: 4rem

@@ -1,15 +1,17 @@
 // -----------------------------------------------------------------------------
-// This file contains all styles related to the composition components.
+// COMPOSITION
 // -----------------------------------------------------------------------------
 
-.composition
+.section-about__composition
 	position: relative
+	display: flex
+	justify-content: space-between
 
 	&:hover img:not(:hover)
 		transform: scale(0.95)
 
 
-.composition__photo
+@mixin composition__photo
 	position: absolute
 	z-index: 1
 	width: 55%
@@ -18,6 +20,11 @@
 	box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4)
 	transition: all 0.2s
 
+	+media('<tablet')
+		display: inline-block
+		position: static
+		width: 30%
+
 	&:hover
 		z-index: 10
 		outline: 1.5rem solid $color-primary-dark
@@ -25,15 +32,17 @@
 		transform: scale(1.05) translateY(-0.5rem)
 
 .composition__photo--p1
-	@extend .composition__photo
+	+composition__photo
+
 
 .composition__photo--p2
-	@extend .composition__photo
+	+composition__photo
 	top: 3vh
 	right: 0
 
+
 .composition__photo--p3
-	@extend .composition__photo
+	+composition__photo
 	top: 10vh
 	left: 10vh
 

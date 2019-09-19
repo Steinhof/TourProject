@@ -1,62 +1,79 @@
 // -----------------------------------------------------------------------------
-// This file contains all styles related to the button component.
+// BUTTONS
 // -----------------------------------------------------------------------------
 
 /* Main button style */
-.btn
-	position: relative
-	text-transform: uppercase
-	text-decoration: none
-	border: 0
-	border-radius: 10em
-	transition: all 0.2s
+@mixin btn
 
-	&::after
-		position: absolute
-		top: 0
-		left: 0
-		z-index: -1
-		width: 100%
-		height: 100%
-		border-radius: inherit
-		transition: all 0.4s
-		content: ""
+	&,
+	&:link,
+	&:visited
+		position: relative
+		display: inline-block
+		text-transform: uppercase
+		text-decoration: none
+		border: 0
+		border-radius: 10rem
+		transition: all 0.2s
 
-	&:hover
-		box-shadow: 0 10px 20px rgba($color-black, 0.2)
-		transform: translateY(-3px)
+		&:hover
+			box-shadow: 0 10px 20px rgba($color-black, 0.2)
+			transform: translateY(-3px)
 
-	&:hover::after
-		transform: scale(1.4, 1.6)
-		opacity: 0
+		&:hover::after
+			transform: scale(1.4, 1.6)
+			opacity: 0
 
-	&:active
-		box-shadow: 0 10px 20px rgba($color-black, 0.2)
-		transform: translateY(-1px)
+		&:active,
+		&:focus
+			box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2)
+			transform: translateY(-1px)
+
+		&::after
+			position: absolute
+			top: 0
+			left: 0
+			z-index: -1
+			display: inline-block
+			width: 100%
+			height: 100%
+			border-radius: 10rem
+			transition: all 0.4s
+			content: ""
 
 
-/* Header button white */
 .btn--white
-	@extend .btn
-	padding: 0.8vmax 2vmax
-	color: #777
+	+btn
+	padding: 1rem 2rem
+	color: $color-black
 	background-color: #fff
-	animation: moveInBottom 0.5s ease-out 0.75s backwards
-	@include font-size(1.3rem)
+	+font-size(1.3rem)
 
 	&::after
 		background-color: $color-white
 
 
-/* About section button */
+.btn--green
+	+btn
+	padding: 1rem 2rem
+	color: $color-white
+	background-color: $color-primary-dark
+
+	&::after
+		background-color: $color-primary-dark
+
+
 .btn--text
-	display: inline-block /* Button doesnt stretch */
-	padding: 3px
-	color: $color-primary
-	font-size: $default-font-size
-	text-decoration: none
-	border-bottom: 1px solid $color-primary
-	transition: all 0.2s
+
+	&:link,
+	&:visited
+		display: inline-block /* Prevent stretching */
+		padding: 3px
+		color: $color-primary
+		font-size: $default-font-size
+		text-decoration: none
+		border-bottom: 1px solid $color-primary
+		transition: all 0.2s
 
 	&:hover
 		color: $color-white
@@ -67,17 +84,3 @@
 	&:active
 		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15)
 		transform: translateY(0)
-
-
-/* Tour buttons */
-.card__button
-	@extend .btn--white
-
-.btn--green
-	@extend .btn--white
-	color: $color-white
-	background-color: $color-primary-dark
-
-	&::after
-		background-color: $color-primary-dark
-

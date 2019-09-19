@@ -1,26 +1,40 @@
 // -----------------------------------------------------------------------------
-// This file contains all styles related to the header of the site/application.
+// HEADER
 // -----------------------------------------------------------------------------
 
 .header
 	height: 95vh
-	background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.6), $color-primary-dark), url('../img/hero.jpg')
+	background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), url('/img/hero-small.png')
+	+media('screen', 'retina2x', '>phone', '>big-desktop')
+		background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), url('/img/hero.png')
 	background-position: top
 	background-size: cover
-	clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%)
+
+	@supports (clip-path: polygon(0 0))
+		clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%)
+
+	+media('<phone')
+		clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%)
 
 
 .header__logo-box
-	padding: 2%
+	margin-top: 5rem
+	margin-left: 5rem
+
+	+media('>tablet')
+		margin-top: 3rem
+		margin-left: 3rem
+
 
 .header__logo
-	height: 4vh
+	height: 3rem
 
 
 .header__text-box
-	display: flex
-	flex-direction: column
-	align-items: center
-	justify-content: center
-	height: 60vh
+	margin: 30vh 0
 	text-align: center
+
+
+.header__btn
+	animation: moveInBottom 0.5s ease-out 0.75s backwards
+
