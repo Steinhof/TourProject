@@ -22,14 +22,17 @@ gulp.task('START-SERVER', done => {
     nodemon({
         script: cfg.files.server,
         ext: 'ts',
-        args: ['--transpile-only', '--pretty'],
-        watch: [cfg.paths.src.base],
+        args: [
+            '--transpile-only',
+            '--pretty',
+            '--project',
+            'tsconfig.node.json',
+        ],
         ignore: ['node_modules/'],
         env: {
-            NODE_ENV: 'development',
-            // NODE_OPTIONS: '--inspect', // load Node.Js profiler
+            NODE_ENV: 'production',
         },
-        scriptPosition: 2, // File name should be at the end
+        scriptPosition: 4, // File name should be at the end
     }).on('start', () => {
         if (!started) {
             done();
@@ -182,11 +185,6 @@ gulp.task('IMAGEMIN', () =>
         )
         .pipe(gulp.dest(cfg.paths.public.img)),
 );
-
-/* Copy files to build folder */
-gulp.task('COPY', () => {
-    gulp.src(cfg.globs.src).pipe(gulp.dest(cfg.paths.dist.base));
-});
 
 // TypeDoc
 gulp.task('TYPEDOC', () =>

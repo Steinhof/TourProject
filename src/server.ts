@@ -9,9 +9,9 @@ import logger from './config/logger';
 /*
  * Environment injection
  */
-dotenv.config({ path: './src/config/.env.development' });
+dotenv.config({ path: './config/' });
 
-/**
+/*
  * Server start
  */
 const HOSTNAME = process.env.SERVER_HOST || 'localhost';

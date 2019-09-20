@@ -26,7 +26,7 @@ module.exports = merge(common, {
                             happyPackMode: true,
                             transpileOnly: true,
                             experimentalFileCaching: true, // Cache results of previous operation
-                            configFile: cfg.configs.ts,
+                            configFile: cfg.configs.ts.build,
                         },
                     },
                     'babel-loader',
@@ -68,7 +68,7 @@ module.exports = merge(common, {
             ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
         new ScriptExtHtmlWebpackPlugin({
-            defaultAttribute: 'async', // async, defer, type='module', preload, prefetch
+            preload: 'runtime', // async, defer, type='module', preload, prefetch, module
         }),
     ],
     optimization: {

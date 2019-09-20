@@ -3,14 +3,14 @@ const PRE_CACHE_NAME = 'pre-cache';
 const DYNAMIC_CACHE_NAME = 'dynamic';
 const RESPONSE_200 = 200;
 
-const STATIC_FILES = ['/', '/img/favicon/comodo_dragon.ico'];
+const STATIC_FILES: string[] = ['BEACON-STATIC'];
 
-const MUTABLE_FILES = [];
+const MUTABLE_FILES: string[] = ['BEACON-MUTABLE'];
 
-self.addEventListener('install', event => {
+self.addEventListener('install', (event: any) => {
     event.waitUntil(
         caches.open(`${PRE_CACHE_NAME}-${VERSION}`).then(cache => {
-            const NEW_STATIC_FILES = [];
+            const NEW_STATIC_FILES: string[] = [];
             return Promise.all(
                 STATIC_FILES.map(url => {
                     return caches.match(url).then(response => {
@@ -30,18 +30,18 @@ self.addEventListener('install', event => {
     );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event: any) => {
     const { request } = event;
     event.respondWith(
         caches.match(request).then(response => {
             return (
                 response ||
-                fetch(event.request).then(response => {
-                    const cacheResp = response.clone();
+                fetch(event.request).then(res => {
+                    const cacheResp = res.clone();
 
                     // only cache is the status is OK, not a chrome-extension URL & not POST
                     if (
-                        [0, RESPONSE_200].includes(response.status) &&
+                        [0, RESPONSE_200].includes(res.status) &&
                         request.url.indexOf('chrome-extension')
                     ) {
                         caches
@@ -51,14 +51,14 @@ self.addEventListener('fetch', event => {
                             });
                     }
 
-                    return response;
+                    return res;
                 })
             );
         }),
     );
 });
 
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event: any) => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
             cacheNames.forEach(item => {
@@ -68,5 +68,4 @@ self.addEventListener('activate', event => {
             });
         }),
     );
-    console.log('SW activate');
 });

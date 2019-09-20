@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Tour project</title>
+    <title>Natours</title>
     <meta name="description" content="Unforgettable adventure ahead">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,19 +18,16 @@
     <meta property="og:image:alt" content="A blue package, symbolizing what webpack does.">
     <meta property="og:description" content="Starter boilerplate for static websites.">
 
-    <!--    Configuring Apple Web Applications-->
-    <!--    <link rel="apple-touch-icon" href="touch-iconiphone.png">-->
-    <!--    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad.png">-->
-    <!--    <link rel="apple-touch-icon" sizes="180x180" href="touch-icon-iphone-retina.png">-->
-    <!--    <link rel="apple-touch-icon" sizes="167x167" href="touch-icon-ipad-retina.png">-->
+    <!--        Configuring Apple Web Applications-->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-touch-icon.png">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:creator" content="@Steinhof">
 
     <!-- Mobile header color for iOS Safari (supports black, black-translucent or default) -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="MyBoilerplate">
+    <meta name="apple-mobile-web-app-status-bar-style" content="green">
+    <meta name="apple-mobile-web-app-title" content="Natours">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- Mobile header color for Chrome, Firefox OS and Opera -->
@@ -67,7 +64,7 @@
 
     <div class="header__logo-box">
         <picture>
-            <img class="header__logo lazyload" data-src="img/logo-white.svg" alt="Natours main logo" loading="lazy">
+            <img class="header__logo lazyload" src="img/logo-white.svg" alt="Natours main logo" loading="lazy">
         </picture>
     </div>
 
@@ -315,9 +312,9 @@
 <section class="section-stories">
 
     <div class="bg-video">
-        <video class="bg-video__content" autoplay muted loop poster="img/video--poster.png">
-            <source src="img/video.mp4" media="(min-width: 768px)" type="video/mp4; codecs=av01.0.05M.08">
-            <source src="img/video.webm" media="(min-width: 768px)" type="video/webm">
+        <video class="bg-video__content lazyload" autoplay muted loop poster="img/video--poster.png">
+            <source data-src="img/video.mp4" media="(min-width: 768px)" type="video/mp4; codecs=av01.0.05M.08">
+            <source data-src="img/video.webm" media="(min-width: 768px)" type="video/webm">
             Your browser is not supported!
         </video>
     </div>

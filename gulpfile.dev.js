@@ -22,14 +22,19 @@ gulp.task('START-SERVER', done => {
     nodemon({
         script: cfg.files.server,
         ext: 'ts',
-        args: ['--transpile-only', '--pretty'],
+        args: [
+            '--transpile-only',
+            '--pretty',
+            '--project',
+            'tsconfig.node.json',
+        ],
         watch: [cfg.paths.src.base],
         ignore: ['node_modules/', cfg.paths.client.base],
         env: {
             NODE_ENV: 'development',
-            // NODE_OPTIONS: '--inspect', // load Node.Js profiler
+            NODE_OPTIONS: '--inspect', // load Node.Js profiler
         },
-        scriptPosition: 2, // File name should be at the end
+        scriptPosition: 4, // File name should be at the end
     }).on('start', () => {
         if (!started) {
             done();
@@ -53,11 +58,6 @@ gulp.task('BROWSER-SYNC', done => {
 /* Webpack */
 gulp.task('WEBPACK', done => {
     webpack(require(cfg.configs.webpack.dev), webpackLogger);
-    done();
-});
-
-gulp.task('SW', done => {
-    webpack(require(cfg.configs.webpack.sw), webpackLogger);
     done();
 });
 

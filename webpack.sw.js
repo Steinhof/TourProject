@@ -23,13 +23,24 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                use: ['cache-loader'],
+                test: /\.ts$/,
+                use: [
+                    'cache-loader',
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            happyPackMode: true,
+                            transpileOnly: true,
+                            experimentalFileCaching: true, // Cache results of previous operation
+                            configFile: cfg.configs.ts.build,
+                        },
+                    },
+                ],
             },
         ],
     },
     resolve: {
-        extensions: ['.js'],
+        extensions: ['.ts', '.js'],
     },
     plugins: [
         new WebpackNotifierPlugin({

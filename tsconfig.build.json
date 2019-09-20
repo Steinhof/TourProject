@@ -23,16 +23,15 @@
     "noEmit": true,
     "tsBuildInfoFile": "./",
     "incremental": true,
-    "target": "es6",
+    "target": "es5",
     "module": "es6",
-    "sourceMap": true,
+    "sourceMap": false,
     "downlevelIteration": true,
     "allowJs": true,
     "checkJs": false,
     "lib": ["dom", "es5"]
   },
   "exclude": [
-    "node_modules",
     "**/*.test.ts"
   ]
 }

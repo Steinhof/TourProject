@@ -34,7 +34,7 @@ module.exports = merge(common, {
                             happyPackMode: true,
                             transpileOnly: true,
                             experimentalFileCaching: true, // Cache results of previous operation
-                            configFile: './tsconfig.json',
+                            configFile: cfg.configs.ts.dev,
                         },
                     },
                 ],
