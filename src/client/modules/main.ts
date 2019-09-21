@@ -3,7 +3,9 @@ import registerServiceWorker from './implementation/serviceWorker/registerServic
 import lazyLoadingVideos from './abstraction/layout/lazyVideos';
 
 // Sass module
-import '../sass/main.sass';
+import styles from '../sass/main.sass';
+
+styles();
 
 // Lazy loading images
 lazyLoadingImages();
