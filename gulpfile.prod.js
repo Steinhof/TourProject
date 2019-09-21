@@ -191,24 +191,6 @@ gulp.task('IMAGEMIN', () =>
         .pipe(gulp.dest(cfg.paths.public.img)),
 );
 
-// TypeDoc
-gulp.task('TYPEDOC', () =>
-    gulp.src(cfg.globs.distModules).pipe(
-        typedoc({
-            module: 'commonjs',
-            exclude: '**/node_modules/**/*.*',
-            target: 'es5',
-            includeDeclarations: true,
-            ignoreCompilerErrors: true,
-            experimentalDecorators: true,
-            excludeExternals: true,
-            version: true,
-            out: './',
-            name: 'My project',
-        }),
-    ),
-);
-
 gulp.task(
     'default',
     gulp.series(

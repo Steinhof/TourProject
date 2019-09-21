@@ -16,10 +16,6 @@ module.exports = {
         filename: '[name].js',
         path: path.resolve(__dirname, cfg.paths.public.base),
     },
-    watch: true,
-    watchOptions: {
-        aggregateTimeout: 300,
-    },
     module: {
         rules: [
             {
