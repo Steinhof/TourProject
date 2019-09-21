@@ -1,11 +1,11 @@
-const VERSION = 'v1';
+const VERSION = 'BEACON-VERSION';
 const PRE_CACHE_NAME = 'pre-cache';
 const DYNAMIC_CACHE_NAME = 'dynamic';
 const RESPONSE_200 = 200;
 
 const STATIC_FILES: string[] = ['BEACON-STATIC'];
 
-const MUTABLE_FILES: string[] = ['BEACON-MUTABLE'];
+const MUTABLE_FILES: string[] = [];
 
 self.addEventListener('install', (event: any) => {
     event.waitUntil(

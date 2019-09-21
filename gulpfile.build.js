@@ -6,6 +6,7 @@ const critical = require('critical').stream;
 const imagemin = require('gulp-imagemin');
 const webpack = require('webpack');
 const nodemon = require('gulp-nodemon');
+const SWInjectFiles = require('./config/SWInjectFiles');
 
 /* File paths */
 const cfg = require('./config/config');
@@ -117,6 +118,20 @@ gulp.task('SW', done => {
     });
 });
 
+gulp.task('SWFILES', done => {
+    const fillSW = new SWInjectFiles('./src/public/sw.js', {
+        ignorePath: './src/public',
+    });
+
+    fillSW.writeStaticFiles([
+        './src/public/img/**/*',
+        './src/public/js/*',
+        './src/public/css/*',
+        './src/public/index.html',
+    ]);
+    done();
+});
+
 // WASM
 // gulp.task('WASM', done => {
 //     const asc = require('assemblyscript/cli/asc');
@@ -209,9 +224,10 @@ gulp.task(
     gulp.series(
         'CLEAN',
         'IMAGEMIN',
-        'START-SERVER',
         'WEBPACK',
         'SW',
+        'START-SERVER',
         'CRITICAL',
+        'SWFILES',
     ),
 );
