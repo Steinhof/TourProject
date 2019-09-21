@@ -4,6 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Fibers = require('fibers');
 
 // Settings
 const cfg = require('./config/config');
@@ -39,11 +40,21 @@ module.exports = merge(common, {
                     {
                         loader: 'css-loader',
                         options: {
-                            importLoaders: 1,
+                            importLoaders: 2,
                         },
                     },
                     'postcss-loader',
-                    'sass-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                includePaths: ['./node_modules'],
+                                implementation: require('sass'),
+                                fiber: Fibers,
+                                indentedSyntax: true,
+                            },
+                        },
+                    },
                 ],
             },
         ],
