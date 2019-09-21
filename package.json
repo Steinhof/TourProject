@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "asbuild:untouched": "asc src/client/modules/implementation/assembly/wasm.ts -b src/client/build/js/untouched.wasm -t dist/untouched.wat --sourceMap --validate --debug",
-    "asbuild:optimized": "asc src/client/modules/implementation/assembly/wasm.ts -t dist/optimized.wat --sourceMap --validate --optimize",
-    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized"
+    "start": "",
+    "dev": "gulp --gulpfile gulpfile.dev.js",
+    "build": "gulp --gulpfile gulpfile.build.js",
+    "production": "gulp --gulpfile gulpfile.prod.js"
   },
   "author": "Steinhof",
   "license": "ISC",
@@ -13,7 +14,7 @@
     "compression": "^1.7.4",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "helmet": "^3.21.0",
+    "helmet": "^3.21.1",
     "sanitize.css": "^11.0.0",
     "winston": "^3.2.1"
   },
@@ -78,11 +79,11 @@
     "stylelint": "^11.0.0",
     "stylelint-config-airbnb": "0.0.0",
     "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-config-recommended-scss": "^3.3.0",
+    "stylelint-config-recommended-scss": "^4.0.0",
     "stylelint-order": "^3.1.1",
-    "stylelint-scss": "^3.11.0",
+    "stylelint-scss": "^3.11.1",
     "terser-webpack-plugin": "latest",
-    "ts-loader": "^6.1.0",
+    "ts-loader": "^6.1.2",
     "ts-node": "^8.4.1",
     "typedoc": "^0.15.0",
     "types-serviceworker": "0.0.1",
