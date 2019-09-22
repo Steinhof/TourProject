@@ -4,7 +4,6 @@ pipeline {
   tools {nodejs "Node"}
 
   stages {
-
     stage('Cloning Git') {
       steps {
         git 'https://github.com/Steinhof/TourProject.git'
