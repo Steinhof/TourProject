@@ -7,19 +7,19 @@ pipeline {
 
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/Steinhof/TourProject'
+        git 'https://github.com/Steinhof/TourProject.git'
       }
     }
 
     stage('Install dependencies') {
       steps {
-        bat 'npm install'
+        sh 'npm install'
       }
     }
 
     stage('Production') {
       steps {
-         bat 'npm run production'
+         sh 'npm run production'
       }
     }
   }
