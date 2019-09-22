@@ -6,6 +6,7 @@ const critical = require('critical').stream;
 const imagemin = require('gulp-imagemin');
 const webpack = require('webpack');
 const ts = require('gulp-typescript');
+const exit = require('gulp-exit');
 const SWInjectFiles = require('./config/SWInjectFiles');
 
 /* File paths */
@@ -203,4 +204,5 @@ gulp.task(
         'COPY',
         'TSDIST',
     ),
+    exit(),
 );
