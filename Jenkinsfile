@@ -7,13 +7,13 @@ pipeline {
 
     stage('Install dependencies') {
       steps {
-        sh 'npm install'
+        bat 'npm install'
       }
     }
 
     stage('Production') {
       steps {
-         sh 'npm run production'
+         bat 'npm run production'
       }
     }
   }
