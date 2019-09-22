@@ -58,7 +58,6 @@
     "fibers": "^4.0.1",
     "glob": "^7.1.4",
     "gulp": "^4.0.2",
-    "gulp-exit": "0.0.2",
     "gulp-imagemin": "^6.1.0",
     "gulp-nodemon": "^2.4.2",
     "gulp-typedoc": "^2.2.2",
