@@ -9,8 +9,7 @@ const myFormat = printf(
         )}  ${level.toUpperCase()} - ${message}\n`,
 );
 
-let logger;
-export default logger = winston.createLogger({
+const logger = winston.createLogger({
     transports: [
         new winston.transports.File({
             filename: './logs/error.log',
@@ -32,3 +31,4 @@ if (process.env.NODE_ENV !== 'production') {
         }),
     );
 }
+export default logger;
