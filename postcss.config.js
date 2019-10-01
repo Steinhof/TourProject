@@ -27,7 +27,7 @@ module.exports = {
             shorten: true,
             keyframes: true,
             fontFace: true,
-            content: [cfg.files.html, cfg.globs.distJs[0]],
+            content: [cfg.files.html, cfg.globs.distJS[0]],
         }),
     ],
 };

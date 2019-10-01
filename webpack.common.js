@@ -1,5 +1,6 @@
 const path = require('path');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const getPackageNameFromPath = require('./config/getPackageNameFromPath');
 
 // Settings
 const cfg = require('./config/config');
@@ -28,18 +29,18 @@ module.exports = {
         runtimeChunk: true,
         splitChunks: {
             chunks: 'all',
-            maxInitialRequests: Infinity,
             minSize: 0,
+            maxInitialRequests: Infinity,
             cacheGroups: {
-                vendor: {
-                    // Split vendor code to its own chunk(s)
-                    test: /[\\/]node_modules[\\/]/,
-                    name(module) {
-                        const packageName = module.context.match(
-                            /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-                        )[1];
-                        // npm package names are URL-safe, but some servers don't like @ symbols
-                        return `npm.${packageName.replace('@', '')}`;
+                vendors: {
+                    test: /\/node_modules\//,
+                    name(module, chunks) {
+                        const packageName = getPackageNameFromPath(
+                            module.context,
+                        ).replace('/', '-');
+                        return `${packageName}~${chunks
+                            .map(chunk => chunk.name)
+                            .join('~')}`;
                     },
                 },
             },

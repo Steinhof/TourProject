@@ -56,7 +56,6 @@ module.exports = merge(common, {
                         },
                     },
                 ],
-                sideEffects: true,
             },
         ],
     },

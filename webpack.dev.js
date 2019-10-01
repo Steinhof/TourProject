@@ -2,6 +2,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Fibers = require('fibers');
 
 // Settings
 const cfg = require('./config/config');
@@ -42,7 +43,22 @@ module.exports = merge(common, {
             },
             {
                 test: /\.(sa|sc|c)ss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            sassOptions: {
+                                includePaths: ['./node_modules'],
+                                implementation: require('sass'),
+                                fiber: Fibers,
+                                indentedSyntax: true,
+                            },
+                        },
+                    },
+                ],
             },
         ],
     },

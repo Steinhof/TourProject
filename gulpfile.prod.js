@@ -15,13 +15,19 @@ const tsProject = ts.createProject(cfg.configs.ts.node);
 
 /* Delete old files */
 gulp.task('CLEAN', done => {
-    del([cfg.globs.distCss[0], cfg.globs.distJs[0]]);
+    del([cfg.globs.distCSS[0], cfg.globs.distJS[0], cfg.paths.dist.public]);
     done();
 });
 
 /* Compile ts server to dist */
 gulp.task('TSDIST', done => {
-    const tsResult = gulp.src(cfg.globs.distTsServer).pipe(tsProject());
+    const tsResult = gulp
+        .src([
+            ...cfg.globs.distTSServer,
+            '!./src/public/**/*',
+            '!./src/client/**/*',
+        ])
+        .pipe(tsProject());
     tsResult.js.pipe(gulp.dest(cfg.paths.dist.base));
     done();
 });

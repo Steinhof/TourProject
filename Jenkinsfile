@@ -4,6 +4,7 @@ pipeline {
   tools {nodejs "Node"}
 
   stages {
+
     stage('Cloning Git') {
       steps {
         git 'https://github.com/Steinhof/TourProject.git'
@@ -21,6 +22,16 @@ pipeline {
          sh 'npm run production'
       }
     }
+
+    stage('Deployment') {
+          steps {
+             sh 'cd dist'
+             sh 'git init'
+             sh 'git add .'
+             sh 'git commit -am 'jenkins''
+             sh 'git push heroku master'
+          }
+     }
   }
 }
 

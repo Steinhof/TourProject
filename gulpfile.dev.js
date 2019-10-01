@@ -5,15 +5,16 @@ const htmlInjector = require('bs-html-injector');
 const webpack = require('webpack');
 const nodemon = require('gulp-nodemon');
 
+
 /* File paths */
-const cfg = require('./config/config.js');
+const cfg = require('./config/clean.js');
 
 /* Notification handler */
-const webpackLogger = require('./config/webpackLogger');
+const webpackLogger = require('./config/tasks/webpackLogger');
 
 /* Delete old files */
 gulp.task('CLEAN', () => {
-    return del([cfg.globs.distCss[0], cfg.globs.distJs[0]]);
+    return del([cfg.globs.distCSS[0], cfg.globs.distJS[0]]);
 });
 
 /* Start server */
@@ -29,7 +30,7 @@ gulp.task('START-SERVER', done => {
             'tsconfig.node.json',
         ],
         watch: [cfg.paths.src.base],
-        ignore: ['node_modules/', cfg.paths.client.base],
+        ignore: [cfg.paths.client.base],
         env: {
             NODE_ENV: 'development',
             NODE_OPTIONS: '--inspect', // load Node.Js profiler
@@ -84,10 +85,10 @@ gulp.task('WEBPACK', done => {
 
 // Watcher
 gulp.task('WATCH', () => {
-    gulp.watch(cfg.globs.distJs).on('change', browserSync.reload);
-    gulp.watch(cfg.globs.distCss).on('change', browserSync.reload);
+    gulp.watch(cfg.globs.distJS).on('change', browserSync.reload);
+    gulp.watch(cfg.globs.distCSS).on('change', browserSync.reload);
     // gulp.watch(settings.wasm.input, gulp.series('WASM'));
-    gulp.watch(cfg.globs.html, { usePolling: true }).on('change', htmlInjector);
+    gulp.watch(cfg.files.html, { usePolling: true }).on('change', htmlInjector);
 });
 
 gulp.task(

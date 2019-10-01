@@ -27,21 +27,25 @@ module.exports = {
             sass: './src/client/sass/',
             templates: './src/client/templates/',
         },
+        config: {
+            base: './config/',
+        },
+    },
+    urls: {
+        dev: 'http://localhost:3000/',
+    },
+    vars: {
+        sassName: 'main.sass',
     },
     globs: {
         src: ['./src/**/*'],
-        distCss: ['./src/public/css/*.css'],
-        distJs: ['./src/public/js/*.js'],
-        distSass: ['./src/client/sass/**/*.sass'],
+        distCSS: ['./src/public/css/*.css'],
+        distJS: ['./src/public/js/*.js'],
+        distSASS: ['./src/client/sass/**/*.sass'],
         distModules: ['./src/client/modules/**/*'],
         distImg: ['./src/public/img/**/*'],
-        html: ['./src/public/index.html'],
         public: ['./src/public/**/*'],
-        distTsServer: [
-            './src/**/*.ts',
-            '!./src/public/**/*',
-            '!./src/client/**/*',
-        ],
+        distTSServer: ['./src/**/*.ts'],
     },
     files: {
         html: './src/public/index.html',

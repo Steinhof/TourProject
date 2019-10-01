@@ -13,7 +13,7 @@ const cfg = require('./config/config');
 
 /* Delete old files */
 gulp.task('CLEAN', done => {
-    del([cfg.globs.distCss[0], cfg.globs.distJs[0]]);
+    del([cfg.globs.distCSS[0], cfg.globs.distJS[0]]);
     done();
 });
 
