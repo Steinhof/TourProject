@@ -1,19 +1,30 @@
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Fibers = require('fibers');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 // Settings
 const cfg = require('./config/config');
-const common = require('./webpack.common');
+const getPackageNameFromPath = require('./config/getPackageNameFromPath');
 
-module.exports = merge(common, {
+module.exports = {
     mode: 'production',
+    context: __dirname,
+    target: 'web',
+    entry: {
+        main: path.resolve(__dirname, cfg.files.ts),
+    },
     output: {
         filename: 'js/[name].[contenthash].js',
+        publicPath: '',
+        path: path.resolve(__dirname, cfg.paths.public.base),
+    },
+    resolve: {
+        extensions: ['.ts', '.js', '.css', '.sass', '.html'],
     },
     module: {
         rules: [
@@ -26,7 +37,6 @@ module.exports = merge(common, {
                         options: {
                             happyPackMode: true,
                             transpileOnly: true,
-                            experimentalFileCaching: true, // Cache results of previous operation
                             configFile: cfg.configs.ts.build,
                         },
                     },
@@ -85,8 +95,32 @@ module.exports = merge(common, {
         new ScriptExtHtmlWebpackPlugin({
             preload: 'runtime', // async, defer, type='module', preload, prefetch, module
         }),
+        new WebpackNotifierPlugin({
+            excludeWarnings: false,
+            sound: true,
+            wait: true,
+        }),
     ],
     optimization: {
+        runtimeChunk: true,
+        splitChunks: {
+            chunks: 'all',
+            minSize: 0,
+            maxInitialRequests: Infinity,
+            cacheGroups: {
+                vendors: {
+                    test: /\/node_modules\//,
+                    name(module, chunks) {
+                        const packageName = getPackageNameFromPath(
+                            module.context,
+                        ).replace('/', '-');
+                        return `${packageName}~${chunks
+                            .map(chunk => chunk.name)
+                            .join('~')}`;
+                    },
+                },
+            },
+        },
         minimizer: [
             new TerserPlugin({
                 cache: true,
@@ -94,4 +128,4 @@ module.exports = merge(common, {
             }),
         ],
     },
-});
+};

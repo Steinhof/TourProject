@@ -1,16 +1,15 @@
 const gulp = require('gulp');
+const path = require('path');
 const del = require('del');
-const browserSync = require('browser-sync').create();
-const htmlInjector = require('bs-html-injector');
 const webpack = require('webpack');
 const nodemon = require('gulp-nodemon');
-
+const WebpackDevServer = require('webpack-dev-server');
 
 /* File paths */
-const cfg = require('./config/clean.js');
+const cfg = require('./config/config.js');
 
 /* Notification handler */
-const webpackLogger = require('./config/tasks/webpackLogger');
+const webpackLogger = require('./config/webpackLogger');
 
 /* Delete old files */
 gulp.task('CLEAN', () => {
@@ -29,11 +28,11 @@ gulp.task('START-SERVER', done => {
             '--project',
             'tsconfig.node.json',
         ],
-        watch: [cfg.paths.src.base],
-        ignore: [cfg.paths.client.base],
+        watch: ['./src'],
+        ignore: ['node_modules/'],
         env: {
             NODE_ENV: 'development',
-            NODE_OPTIONS: '--inspect', // load Node.Js profiler
+            NODE_OPTIONS: '--inspect',
         },
         scriptPosition: 4, // File name should be at the end
     }).on('start', () => {
@@ -45,20 +44,20 @@ gulp.task('START-SERVER', done => {
     done();
 });
 
-/* Static server */
-gulp.task('BROWSER-SYNC', done => {
-    browserSync.init({
-        proxy: 'http://localhost:3000', // Server address
-        notify: false, // Browser notification
-        open: false, // Open project in a new tab?
-        reloadDebounce: 300, // Wait 300 before .reload
-    });
-    done();
-});
-
 /* Webpack */
 gulp.task('WEBPACK', done => {
-    webpack(require(cfg.configs.webpack.dev), webpackLogger);
+    const compiler = webpack(require(cfg.configs.webpack.dev));
+    new WebpackDevServer(compiler, {
+        stats: webpackLogger,
+        hot: true,
+        contentBase: path.join(__dirname, cfg.paths.public.base),
+        watchContentBase: true,
+        proxy: {
+            context: ['/'],
+            target: 'http://localhost:3000',
+        },
+        port: 3001,
+    }).listen(3001);
     done();
 });
 
@@ -83,15 +82,4 @@ gulp.task('WEBPACK', done => {
 //     done();
 // });
 
-// Watcher
-gulp.task('WATCH', () => {
-    gulp.watch(cfg.globs.distJS).on('change', browserSync.reload);
-    gulp.watch(cfg.globs.distCSS).on('change', browserSync.reload);
-    // gulp.watch(settings.wasm.input, gulp.series('WASM'));
-    gulp.watch(cfg.files.html, { usePolling: true }).on('change', htmlInjector);
-});
-
-gulp.task(
-    'default',
-    gulp.series('CLEAN', 'START-SERVER', 'BROWSER-SYNC', 'WEBPACK', 'WATCH'),
-);
+gulp.task('default', gulp.series('CLEAN', 'START-SERVER', 'WEBPACK'));

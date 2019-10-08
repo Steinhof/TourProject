@@ -7,8 +7,10 @@
 	background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), url('/img/hero-small.png')
 	+media('screen', 'retina2x', '>phone', '>big-desktop')
 		background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), url('/img/hero.png')
-	background-position: top
+	background-position: center
 	background-size: cover
+	background-repeat: no-repeat
+	background-attachment: fixed
 
 	@supports (clip-path: polygon(0 0))
 		clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%)
