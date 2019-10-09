@@ -29,7 +29,7 @@ gulp.task('START-SERVER', done => {
             'tsconfig.node.json',
         ],
         watch: ['./src'],
-        ignore: ['node_modules/'],
+        ignore: ['node_modules/', cfg.paths.public.base, cfg.paths.client.base],
         env: {
             NODE_ENV: 'development',
             NODE_OPTIONS: '--inspect',

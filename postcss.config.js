@@ -6,12 +6,13 @@ const cfg = require('./config/config');
 module.exports = {
     plugins: [
         postcssPresetEnv({
-            stage: 3,
+            stage: 0,
             autoprefixer: { grid: 'autoplace' }, // Don't forget grid-rows
             features: {
                 'nesting-rules': true, // Nesting selectors
             },
         }),
+        require('postcss-easing-gradients'),
         cssnano({
             preset: [
                 'advanced',
