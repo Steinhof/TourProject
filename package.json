@@ -10,6 +10,7 @@
   "author": "Steinhof",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "compression": "^1.7.4",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",

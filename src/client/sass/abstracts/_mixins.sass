@@ -4,13 +4,14 @@
 
 /* ClearFix */
 @mixin clearfix()
-	&::after
-		display: block
+	&::after,
+	&::before
+		display: table
 		clear: both
 		content: ""
 
 
-/* Аbsolute centering of an element */
+/* Аbsolute centering */
 @mixin absCenter
 	position: absolute
 	top: 50%
