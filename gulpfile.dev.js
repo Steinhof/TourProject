@@ -8,15 +8,19 @@ const WebpackDevServer = require('webpack-dev-server');
 /* File paths */
 const cfg = require('./config/config.js');
 
-/* Notification handler */
+/* Webpack notification stats object */
 const webpackLogger = require('./config/webpackLogger');
 
-/* Delete old files */
+// -----------------------------------------------------------------------------
+// DELETE OLD FILES
+// -----------------------------------------------------------------------------
 gulp.task('CLEAN', () => {
     return del([cfg.globs.distCSS[0], cfg.globs.distJS[0]]);
 });
 
-/* Start server */
+// -----------------------------------------------------------------------------
+// NODEMON SERVER
+// -----------------------------------------------------------------------------
 gulp.task('START-SERVER', done => {
     let started = false;
     nodemon({
@@ -36,6 +40,7 @@ gulp.task('START-SERVER', done => {
         },
         scriptPosition: 4, // File name should be at the end
     }).on('start', () => {
+        // to prevent double start
         if (!started) {
             done();
             started = true;
@@ -44,7 +49,9 @@ gulp.task('START-SERVER', done => {
     done();
 });
 
-/* Webpack */
+// -----------------------------------------------------------------------------
+// WEBPACK
+// -----------------------------------------------------------------------------
 gulp.task('WEBPACK', done => {
     const compiler = webpack(require(cfg.configs.webpack.dev));
     new WebpackDevServer(compiler, {
@@ -61,7 +68,9 @@ gulp.task('WEBPACK', done => {
     done();
 });
 
+// -----------------------------------------------------------------------------
 // WASM
+// -----------------------------------------------------------------------------
 // gulp.task('WASM', done => {
 //     const asc = require('assemblyscript/cli/asc');
 //     asc.main(
@@ -82,4 +91,7 @@ gulp.task('WEBPACK', done => {
 //     done();
 // });
 
+// -----------------------------------------------------------------------------
+// GULP START
+// -----------------------------------------------------------------------------
 gulp.task('default', gulp.series('CLEAN', 'START-SERVER', 'WEBPACK'));

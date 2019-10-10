@@ -13,13 +13,17 @@ const cfg = require('./config/config');
 /* Tsconfig for node.js */
 const tsProject = ts.createProject(cfg.configs.ts.node);
 
-/* Delete old files */
+// -----------------------------------------------------------------------------
+// DELETE OLD FILES
+// -----------------------------------------------------------------------------
 gulp.task('CLEAN', done => {
     del([cfg.globs.distCSS[0], cfg.globs.distJS[0], cfg.paths.dist.public]);
     done();
 });
 
-/* Compile ts server to dist */
+// -----------------------------------------------------------------------------
+// COMPILE TS FILES & MOVE TO DIST
+// -----------------------------------------------------------------------------
 gulp.task('TSDIST', done => {
     const tsResult = gulp
         .src([
@@ -32,13 +36,17 @@ gulp.task('TSDIST', done => {
     done();
 });
 
-/* Copy files to dist/public folder */
+// -----------------------------------------------------------------------------
+// MOVE PUBLIC FILES TO DIST
+// -----------------------------------------------------------------------------
 gulp.task('COPY', done => {
     gulp.src(cfg.globs.public).pipe(gulp.dest(cfg.paths.dist.public));
     done();
 });
 
-/* Webpack */
+// -----------------------------------------------------------------------------
+// WEBPACK
+// -----------------------------------------------------------------------------
 gulp.task('WEBPACK', done => {
     webpack(require(cfg.configs.webpack.build), function webpackErrorHandler(
         err,
@@ -76,6 +84,9 @@ gulp.task('WEBPACK', done => {
     });
 });
 
+// -----------------------------------------------------------------------------
+// SERVICE WORKER
+// -----------------------------------------------------------------------------
 gulp.task('SW', done => {
     webpack(require(cfg.configs.webpack.sw), function webpackErrorHandler(
         err,
@@ -113,6 +124,9 @@ gulp.task('SW', done => {
     });
 });
 
+// -----------------------------------------------------------------------------
+// INJECT CACHE FILES TO SW
+// -----------------------------------------------------------------------------
 gulp.task('SWFILES', done => {
     const fillSW = new SWInjectFiles('./src/public/sw.js', {
         ignorePath: './src/public',
@@ -127,7 +141,9 @@ gulp.task('SWFILES', done => {
     done();
 });
 
+// -----------------------------------------------------------------------------
 // WASM
+// -----------------------------------------------------------------------------
 // gulp.task('WASM', done => {
 //     const asc = require('assemblyscript/cli/asc');
 //     asc.main(
@@ -148,7 +164,9 @@ gulp.task('SWFILES', done => {
 //     done();
 // });
 
-/* Generate & Inline Critical-path CSS */
+// -----------------------------------------------------------------------------
+// CRITICAL CSS
+// -----------------------------------------------------------------------------
 gulp.task('CRITICAL', done => {
     const criticalWidthMobile = 375;
     const criticalHeightMobile = 667;
@@ -179,7 +197,9 @@ gulp.task('CRITICAL', done => {
     done();
 });
 
-/* Compress images */
+// -----------------------------------------------------------------------------
+// IMAGE COMPRESSION
+// -----------------------------------------------------------------------------
 gulp.task('IMAGEMIN', () =>
     gulp
         .src(cfg.paths.public.img)
@@ -196,6 +216,9 @@ gulp.task('IMAGEMIN', () =>
         .pipe(gulp.dest(cfg.paths.public.img)),
 );
 
+// -----------------------------------------------------------------------------
+// GULP START
+// -----------------------------------------------------------------------------
 gulp.task(
     'default',
     gulp.series(

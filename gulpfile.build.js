@@ -11,13 +11,17 @@ const SWInjectFiles = require('./config/SWInjectFiles');
 /* File paths */
 const cfg = require('./config/config');
 
-/* Delete old files */
+// -----------------------------------------------------------------------------
+// DELETE OLD FILES
+// -----------------------------------------------------------------------------
 gulp.task('CLEAN', done => {
     del([cfg.globs.distCSS[0], cfg.globs.distJS[0]]);
     done();
 });
 
-/* Start server */
+// -----------------------------------------------------------------------------
+// NODEMON SERVER
+// -----------------------------------------------------------------------------
 gulp.task('START-SERVER', done => {
     let started = false;
     nodemon({
@@ -43,7 +47,9 @@ gulp.task('START-SERVER', done => {
     done();
 });
 
-/* Webpack */
+// -----------------------------------------------------------------------------
+// WEBPACK
+// -----------------------------------------------------------------------------
 gulp.task('WEBPACK', done => {
     webpack(require(cfg.configs.webpack.build), function webpackErrorHandler(
         err,
@@ -81,6 +87,9 @@ gulp.task('WEBPACK', done => {
     });
 });
 
+// -----------------------------------------------------------------------------
+// SERVICE WORKER
+// -----------------------------------------------------------------------------
 gulp.task('SW', done => {
     webpack(require(cfg.configs.webpack.sw), function webpackErrorHandler(
         err,
@@ -118,6 +127,9 @@ gulp.task('SW', done => {
     });
 });
 
+// -----------------------------------------------------------------------------
+// INJECT CACHE FILES TO SW
+// -----------------------------------------------------------------------------
 gulp.task('SWFILES', done => {
     const fillSW = new SWInjectFiles('./src/public/sw.js', {
         ignorePath: './src/public',
@@ -132,7 +144,9 @@ gulp.task('SWFILES', done => {
     done();
 });
 
+// -----------------------------------------------------------------------------
 // WASM
+// -----------------------------------------------------------------------------
 // gulp.task('WASM', done => {
 //     const asc = require('assemblyscript/cli/asc');
 //     asc.main(
@@ -153,7 +167,9 @@ gulp.task('SWFILES', done => {
 //     done();
 // });
 
-/* Generate & Inline Critical-path CSS */
+// -----------------------------------------------------------------------------
+// CRITICAL CSS
+// -----------------------------------------------------------------------------
 gulp.task('CRITICAL', done => {
     const criticalWidthMobile = 375;
     const criticalHeightMobile = 667;
@@ -184,7 +200,9 @@ gulp.task('CRITICAL', done => {
     done();
 });
 
-/* Compress images */
+// -----------------------------------------------------------------------------
+// IMAGE COMPRESSION
+// -----------------------------------------------------------------------------
 gulp.task('IMAGEMIN', () =>
     gulp
         .src(cfg.paths.public.img)
@@ -201,12 +219,14 @@ gulp.task('IMAGEMIN', () =>
         .pipe(gulp.dest(cfg.paths.public.img)),
 );
 
-// TypeDoc
+// -----------------------------------------------------------------------------
+// TYPEDOC
+// -----------------------------------------------------------------------------
 gulp.task('TYPEDOC', () =>
     gulp.src(cfg.globs.distModules).pipe(
         typedoc({
             module: 'commonjs',
-            exclude: '**/node_modules/**/*.*',
+            exclude: '/node_modules/',
             target: 'es5',
             includeDeclarations: true,
             ignoreCompilerErrors: true,
@@ -219,6 +239,9 @@ gulp.task('TYPEDOC', () =>
     ),
 );
 
+// -----------------------------------------------------------------------------
+// GULP START
+// -----------------------------------------------------------------------------
 gulp.task(
     'default',
     gulp.series(
