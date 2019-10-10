@@ -4,17 +4,20 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const Fibers = require('fibers');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const getPackageNameFromPath = require('./config/getPackageNameFromPath');
 
 // Settings
 const cfg = require('./config/config');
 
+// Package name
+const getPackageNameFromPath = require('./config/getPackageNameFromPath');
+
 module.exports = {
+    target: 'web',
+    mode: 'development',
     context: __dirname,
     entry: {
         main: path.resolve(__dirname, cfg.files.ts),
     },
-    mode: 'development',
     devtool: 'cheap-module-eval-source-map',
     output: {
         filename: 'js/[name].js',
@@ -57,7 +60,6 @@ module.exports = {
                         options: {
                             sourceMap: true,
                             sassOptions: {
-                                includePaths: ['./node_modules'],
                                 implementation: require('sass'),
                                 fiber: Fibers,
                                 indentedSyntax: true,

@@ -6,6 +6,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Fibers = require('fibers');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const CriticalCssPlugin = require('critical-css-webpack-plugin');
 
 // Settings
 const cfg = require('./config/config');
@@ -22,6 +23,7 @@ module.exports = {
         filename: 'js/[name].[contenthash].js',
         publicPath: '',
         path: path.resolve(__dirname, cfg.paths.public.base),
+        // libraryTarget: 'commonjs2', // To make the library compatible with other environments
     },
     resolve: {
         extensions: ['.ts', '.js', '.css', '.sass', '.html'],
@@ -58,7 +60,6 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             sassOptions: {
-                                includePaths: ['./node_modules'],
                                 implementation: require('sass'),
                                 fiber: Fibers,
                                 indentedSyntax: true,
@@ -70,6 +71,24 @@ module.exports = {
         ],
     },
     plugins: [
+        new CriticalCssPlugin({
+            base: cfg.paths.public.base,
+            src: 'index.html',
+            dest: 'index.html',
+            inline: true,
+            minify: true,
+            extract: true,
+            dimensions: [
+                {
+                    width: cfg.criticalCssConfig.criticalWidthDesktop,
+                    height: cfg.criticalCssConfig.criticalHeightDesktop,
+                },
+                {
+                    width: cfg.criticalCssConfig.criticalWidthMobile,
+                    height: cfg.criticalCssConfig.criticalHeightMobile,
+                },
+            ],
+        }),
         new webpack.HashedModuleIdsPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',

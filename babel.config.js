@@ -10,6 +10,7 @@ module.exports = api => {
                 loose: true,
             },
         ],
+        'minify',
     ];
     const plugins = [];
 

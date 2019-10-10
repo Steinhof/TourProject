@@ -50,7 +50,7 @@ gulp.task('START-SERVER', done => {
 });
 
 // -----------------------------------------------------------------------------
-// WEBPACK
+// WEBPACK DEV SERVER
 // -----------------------------------------------------------------------------
 gulp.task('WEBPACK', done => {
     const compiler = webpack(require(cfg.configs.webpack.dev));
@@ -59,6 +59,11 @@ gulp.task('WEBPACK', done => {
         hot: true,
         contentBase: path.join(__dirname, cfg.paths.public.base),
         watchContentBase: true,
+        // writeToDisk: true,
+        // headers: { //For CORS
+        //     'Access-Control-Allow-Origin': '*',
+        //     'Access-Control-Allow-Headers': '*',
+        // },
         proxy: {
             context: ['/'],
             target: 'http://localhost:3000',

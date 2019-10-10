@@ -1,8 +1,6 @@
 const gulp = require('gulp');
 const del = require('del');
-const fs = require('fs');
 const typedoc = require('gulp-typedoc');
-const critical = require('critical').stream;
 const imagemin = require('gulp-imagemin');
 const webpack = require('webpack');
 const nodemon = require('gulp-nodemon');
@@ -10,6 +8,9 @@ const SWInjectFiles = require('./config/SWInjectFiles');
 
 /* File paths */
 const cfg = require('./config/config');
+
+/* Webpack error handler */
+const webpackErrorHandler = require('./config/webpackErrorHandler');
 
 // -----------------------------------------------------------------------------
 // DELETE OLD FILES
@@ -51,80 +52,16 @@ gulp.task('START-SERVER', done => {
 // WEBPACK
 // -----------------------------------------------------------------------------
 gulp.task('WEBPACK', done => {
-    webpack(require(cfg.configs.webpack.build), function webpackErrorHandler(
-        err,
-        stats,
-    ) {
-        if (err) {
-            console.error(err.stack || err);
-            if (err.details) {
-                console.error(err.details);
-            }
-            return;
-        }
-        const statsConfig = {
-            all: false,
-            /* Show entries */
-            assets: true,
-            colors: true,
-            modules: false,
-            errors: true,
-            cachedAssets: true,
-            /* Stat logs */
-            warnings: true,
-            performance: true,
-            moduleTrace: true,
-            errorDetails: true,
-        };
-
-        // Result (you can choose stats preset)
-        console.log(
-            `${stats.toString(
-                statsConfig,
-            )} -- ${new Date().toLocaleTimeString()}`,
-        );
-        done();
-    });
+    webpack(require(cfg.configs.webpack.build), webpackErrorHandler);
+    done();
 });
 
 // -----------------------------------------------------------------------------
 // SERVICE WORKER
 // -----------------------------------------------------------------------------
 gulp.task('SW', done => {
-    webpack(require(cfg.configs.webpack.sw), function webpackErrorHandler(
-        err,
-        stats,
-    ) {
-        if (err) {
-            console.error(err.stack || err);
-            if (err.details) {
-                console.error(err.details);
-            }
-            return;
-        }
-        const statsConfig = {
-            all: false,
-            /* Show entries */
-            assets: true,
-            colors: true,
-            modules: false,
-            errors: true,
-            cachedAssets: true,
-            /* Stat logs */
-            warnings: true,
-            performance: true,
-            moduleTrace: true,
-            errorDetails: true,
-        };
-
-        // Result (you can choose stats preset)
-        console.log(
-            `${stats.toString(
-                statsConfig,
-            )} -- ${new Date().toLocaleTimeString()}`,
-        );
-        done();
-    });
+    webpack(require(cfg.configs.webpack.sw), webpackErrorHandler);
+    done();
 });
 
 // -----------------------------------------------------------------------------
@@ -166,39 +103,6 @@ gulp.task('SWFILES', done => {
 //     );
 //     done();
 // });
-
-// -----------------------------------------------------------------------------
-// CRITICAL CSS
-// -----------------------------------------------------------------------------
-gulp.task('CRITICAL', done => {
-    const criticalWidthMobile = 375;
-    const criticalHeightMobile = 667;
-    const criticalWidthDesktop = 1376;
-    const criticalHeightDesktop = 768;
-    gulp.src(cfg.files.html)
-        .pipe(
-            critical({
-                base: cfg.paths.public.base,
-                inline: true,
-                minify: true,
-                dimensions: [
-                    {
-                        width: criticalWidthMobile,
-                        height: criticalHeightMobile,
-                    },
-                    {
-                        width: criticalWidthDesktop,
-                        height: criticalHeightDesktop,
-                    },
-                ],
-                css: `${cfg.paths.public.css}${fs.readdirSync(
-                    './src/public/css/',
-                )}`,
-            }),
-        )
-        .pipe(gulp.dest(cfg.paths.public.base));
-    done();
-});
 
 // -----------------------------------------------------------------------------
 // IMAGE COMPRESSION
@@ -250,7 +154,6 @@ gulp.task(
         'WEBPACK',
         'SW',
         'START-SERVER',
-        'CRITICAL',
         'SWFILES',
     ),
 );

@@ -6,6 +6,7 @@ const getJsFiles = fs.readdirSync('./src/public/js/');
 
 // Export variables
 module.exports = {
+    name: 'Example Project',
     paths: {
         src: {
             base: './src/',
@@ -71,5 +72,11 @@ module.exports = {
             dev: 'tsconfig.json',
             build: 'tsconfig.build.json',
         },
+    },
+    criticalCssConfig: {
+        criticalWidthMobile: 375,
+        criticalHeightMobile: 667,
+        criticalWidthDesktop: 1376,
+        criticalHeightDesktop: 768,
     },
 };
