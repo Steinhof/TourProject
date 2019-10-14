@@ -3,13 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const Fibers = require('fibers');
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 // Settings
 const cfg = require('./config/config');
-
-// Package name
-const getPackageNameFromPath = require('./config/getPackageNameFromPath');
 
 module.exports = {
     target: 'web',
@@ -25,21 +22,21 @@ module.exports = {
         path: path.resolve(__dirname, cfg.paths.public.base),
     },
     watch: true,
+    resolve: {
+        extensions: ['.ts', '.js', '.css', '.sass'],
+    },
     module: {
         rules: [
             {
                 test: /\.ts$/,
                 use: [
-                    {
-                        loader: 'cache-loader',
-                    },
+                    'cache-loader',
                     {
                         loader: 'ts-loader',
                         options: {
                             happyPackMode: true,
                             transpileOnly: true,
                             experimentalWatchApi: true,
-                            configFile: cfg.configs.ts.dev,
                         },
                     },
                 ],
@@ -48,12 +45,7 @@ module.exports = {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            hot: true,
-                        },
-                    },
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     {
                         loader: 'sass-loader',
@@ -70,21 +62,21 @@ module.exports = {
             },
         ],
     },
-    resolve: {
-        extensions: ['.ts', '.js', '.css', '.sass', '.html'],
-    },
     plugins: [
         new HtmlWebpackPlugin({
-            alwaysWriteToDisk: true,
-            filename: 'index.html',
             template: cfg.files.template,
-            // excludeChunks: ['server'], Dont want to be included in HTML
         }),
-        new HtmlWebpackHarddiskPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
             chunkFilename: 'css/[id].css',
             ignoreOrder: false, // Enable to remove warnings about conflicting order
+        }),
+        new BrowserSyncPlugin({
+            host: 'localhost',
+            port: 3001,
+            proxy: 'http://localhost:3000/',
+            open: false,
+            notify: false,
         }),
         new WebpackNotifierPlugin({
             excludeWarnings: false,
@@ -92,25 +84,4 @@ module.exports = {
             wait: true,
         }),
     ],
-    optimization: {
-        runtimeChunk: true,
-        splitChunks: {
-            chunks: 'all',
-            minSize: 0,
-            maxInitialRequests: Infinity,
-            cacheGroups: {
-                vendors: {
-                    test: /\/node_modules\//,
-                    name(module, chunks) {
-                        const packageName = getPackageNameFromPath(
-                            module.context,
-                        ).replace('/', '-');
-                        return `${packageName}~${chunks
-                            .map(chunk => chunk.name)
-                            .join('~')}`;
-                    },
-                },
-            },
-        },
-    },
 };
