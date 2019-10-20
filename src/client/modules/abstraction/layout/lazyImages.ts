@@ -44,18 +44,19 @@ export default function lazyLoadingImages(): void {
             });
         });
     } else {
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
             let lazyImages = [].slice.call(
                 document.querySelectorAll('img.lazyload'),
             );
             let active = false;
 
-            const lazyLoad = () => {
+            const lazyLoad = function lazyLoad() {
                 if (!active) {
                     active = true;
-
-                    setTimeout(() => {
-                        lazyImages.forEach((lazyImage: HTMLImageElement) => {
+                    setTimeout(function() {
+                        lazyImages.forEach(function(
+                            lazyImage: HTMLImageElement,
+                        ) {
                             if (
                                 lazyImage.getBoundingClientRect().top <=
                                     window.innerHeight &&
@@ -71,10 +72,9 @@ export default function lazyLoadingImages(): void {
                                 }
 
                                 lazyImage.classList.remove('lazyload');
-
-                                lazyImages = lazyImages.filter(
-                                    image => image !== lazyImage,
-                                );
+                                lazyImages = lazyImages.filter(function(image) {
+                                    return image !== lazyImage;
+                                });
 
                                 if (lazyImages.length === 0) {
                                     document.removeEventListener(
@@ -92,7 +92,6 @@ export default function lazyLoadingImages(): void {
                                 }
                             }
                         });
-
                         active = false;
                     }, 200);
                 }

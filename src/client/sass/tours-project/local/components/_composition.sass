@@ -1,0 +1,81 @@
+// -----------------------------------------------------------------------------
+// COMPOSITION
+// -----------------------------------------------------------------------------
+
+
+//Composition
+//
+//Photo collage with 3 photos
+//
+//Markup:
+//<div class="composition">
+//                <img class="composition__photo--p1 lazyload"
+//                     width="55%"
+//                     data-src="img/nat-1-large.png"
+//                     data-srcset="img/nat-1.png 300w, img/nat-1-large.png 1000w"
+//                     sizes="(max-width: 56.25‬em) 20vw, (max-width: 37.5em) 30vw, 300px"
+//                     alt="Lake in the forest photo" loading="lazy">
+//                <img class="composition__photo--p2 lazyload"
+//                     width="55%"
+//                     data-src="img/nat-2-large.png"
+//                     data-srcset="img/nat-2.png 300w, img/nat-2-large.png 1000w"
+//                     sizes="(max-width: 56.25‬em) 20vw, (max-width: 37.5em) 30vw, 300px"
+//                     alt="Mountains on a sunrise photo" loading="lazy">
+//                <img class="composition__photo--p3 lazyload"
+//                     width="55%"
+//                     data-src="img/nat-3-large.png"
+//                     data-srcset="img/nat-3.png 300w, img/nat-3-large.png 1000w"
+//                     sizes="(max-width: 56.25‬em) 20vw, (max-width: 37.5em) 30vw, 300px"
+//                     alt="Road to the dream landscape" loading="lazy">
+//            </div>
+//
+//Styleguide Components.Composition
+
+.composition
+	position: relative
+	display: flex
+	justify-content: space-between
+
+	&:hover img:not(:hover)
+		transform: scale(0.95)
+
+
+@mixin composition__photo
+	position: absolute
+	z-index: $z-start
+	width: 55%
+	border-radius: 2px
+	outline-offset: 2rem
+	box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4)
+	transition: all 0.2s
+
+	+media('<tablet')
+		display: inline-block
+		position: static
+		width: 30%
+
+	&:hover
+		z-index: $z-composition-photo-hover
+		outline: 1.5rem solid $color-primary-dark
+		box-shadow: 0 1.5rem 4rem rgba($color-black, 0.5)
+		transform: scale(1.05) translateY(-0.5rem)
+
+
+.composition__photo--p1
+	+composition__photo
+
+
+.composition__photo--p2
+	+composition__photo
+	top: 3vh
+	right: 0
+
+
+.composition__photo--p3
+	+composition__photo
+	top: 10vh
+	left: 10vh
+
+
+
+

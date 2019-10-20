@@ -8,7 +8,7 @@ module.exports = {
     },
     plugins: [
         '@typescript-eslint',
-        'prettier'
+        // 'prettier' commented as i don't want to run prettier through eslint because performance
     ],
     env: {
         browser: true,

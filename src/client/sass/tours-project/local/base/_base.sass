@@ -1,0 +1,29 @@
+// -----------------------------------------------------------------------------
+// BASIC STYLES
+// -----------------------------------------------------------------------------
+
+body
+	position: relative
+	display: flex
+	flex-direction: column
+	min-width: 320px
+	min-height: 100vh
+	padding: 3rem
+	overflow-x: hidden
+	font-family: $default-font
+	line-height: 1.65
+	word-wrap: break-word
+	text-rendering: optimizeSpeed
+
+	+media('<tablet')
+		padding: 0
+
+::selection
+	color: $color-white
+	background-color: $color-primary
+
+
++media('print')
+	*
+		color: $color-black !important
+		background: none !important

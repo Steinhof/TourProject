@@ -1,0 +1,18 @@
+// -----------------------------------------------------------------------------
+// HTML SIZES
+// -----------------------------------------------------------------------------
+
+html
+	padding: 0
+	/* This defines what 1 rem is */
+	font-size: 62.5% /* 1rem = 10px; 10/16px = 62.5% */
+	scroll-behavior: smooth /* Smooth moves */
+
+	+media('<desktop')
+		font-size: 56.25% /* 1 rem = 9px; 9/16 = 56.25%; width < 1200 */
+
+	+media('<tablet')
+		font-size: 50% /* 1rem = 8px; 8/16 = 50%; width < 900 */ //700 - last will be applied
+
+	+media('>big-desktop')
+		font-size: 75% /* 1 rem = 12px; 12/16 = 75%; width > 1800 */

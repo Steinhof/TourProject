@@ -1,0 +1,99 @@
+// -----------------------------------------------------------------------------
+// BUTTONS
+// -----------------------------------------------------------------------------
+
+//Buttons
+//
+//Buttons collection
+//
+//Markup:
+//<button class="{{modifier_class}}">Press me</button>
+//
+//.btn--white - белая кнопка
+//.btn--green - зеленая кнопка
+//.btn--text - нопка текста
+//
+//Styleguide Components.Buttons
+//
+
+@mixin btn
+
+	&,
+	&:link,
+	&:visited
+		position: relative
+		display: inline-block
+		text-transform: uppercase
+		text-decoration: none
+		border: 0
+		border-radius: 10rem
+		transition: all 0.2s
+
+		&:hover
+			box-shadow: 0 10px 20px rgba($color-black, 0.2)
+			transform: translateY(-3px)
+
+		&:hover::after
+			transform: scale(1.4, 1.6)
+			opacity: 0
+
+		&:active,
+		&:focus
+			box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2)
+			transform: translateY(-1px)
+
+		&::after
+			position: absolute
+			top: 0
+			left: 0
+			z-index: $z-lower-priority
+			display: inline-block
+			width: 100%
+			height: 100%
+			border-radius: 10rem
+			transition: all 0.4s
+			content: ""
+
+
+.btn--white
+	+btn
+	padding: 1rem 2rem
+	color: $color-black
+	background-color: #fff
+	+font-size(1.3rem)
+
+	&::after
+		background-color: $color-white
+
+
+.btn--green
+	+btn
+	padding: 1rem 2rem
+	color: $color-white
+	background-color: $color-primary-dark
+
+	&::after
+		background-color: $color-primary-dark
+
+
+.btn--text
+
+	&:link,
+	&:visited
+		display: inline-block /* Prevent stretching */
+		padding: 3px
+		color: $color-primary
+		font-size: $default-font-size
+		text-decoration: none
+		border-bottom: 1px solid $color-primary
+		transition: all 0.2s
+
+	&:hover
+		color: $color-white
+		background-color: $color-primary
+		box-shadow: 0 1rem 2rem rgba($color-black, 0.15)
+		transform: translateY(-2px)
+
+	&:active
+		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15)
+		transform: translateY(0)

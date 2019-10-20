@@ -5,8 +5,10 @@ export default function registerServiceWorker(): void {
         } else {
             navigator.serviceWorker
                 .register('sw.js')
-                .then((reg) => {
-                    console.log('Service worker has been registered, scope: ' + reg.scope);
+                .then(reg => {
+                    console.log(
+                        `Service worker has been registered, scope: ${reg.scope}`,
+                    );
                     return navigator.serviceWorker.ready;
                 })
                 .catch(err => console.log(err));

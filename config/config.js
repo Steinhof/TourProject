@@ -34,6 +34,11 @@ module.exports = {
     },
     urls: {
         dev: 'http://localhost:3000/',
+        proxy: 'http://localhost:3001/',
+    },
+    ports: {
+        dev: '3000',
+        proxy: '3001',
     },
     vars: {
         sassName: 'main.sass',
@@ -51,6 +56,7 @@ module.exports = {
     files: {
         html: './src/public/index.html',
         template: './src/client/templates/module.html',
+        favicon: './src/public/img/favicon/tour-favicon.ico',
         sass: './src/client/sass/main.sass',
         ts: './src/client/modules/main.ts',
         wasm: './src/client/modules/implementation/assembly/wasm.ts',
@@ -66,6 +72,7 @@ module.exports = {
             dev: './webpack.dev.js',
             build: './webpack.build.js',
             sw: './webpack.sw.js',
+            node: './webpack.node.js',
         },
         ts: {
             node: 'tsconfig.node.json',

@@ -1,0 +1,34 @@
+// -----------------------------------------------------------------------------
+// RESPONSIVE FONT SIZE
+// -----------------------------------------------------------------------------
+
+/* [see: https://github.com/twbs/rfs ]
+@import '~rfs/sass'
+
+
+//.title
+//	+font-size(4rem)
+
+// The font-size mixin is a shorthand which calls
+// +rfs(4rem, font-size)
+
+// Other shorthand mixins that are available are:
+// +padding(4rem)
+// +padding-top(4rem)
+// +padding-right(4rem)
+// +padding-bottom(4rem)
+// +padding-left(4rem)
+// +margin(4rem)
+// +margin-top(4rem)
+// +margin-right(4rem)
+// +margin-bottom(4rem)
+// +margin-left(4rem)
+
+// For properties which do not have a shorthand, the property can be passed:
+// +rfs(4rem, border-radius)
+
+// Whenever a value contains a space, it should be escaped with `#{}`:
+// +rfs(0 0 4rem red #{","} 0 0 5rem blue, box-shadow)
+
+// Custom properties (css variables):
+// +rfs(4rem, --border-radius)

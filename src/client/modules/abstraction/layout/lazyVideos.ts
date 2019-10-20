@@ -5,10 +5,10 @@ export default function lazyLoadingVideos(): void {
         if ('IntersectionObserver' in window) {
             const lazyVideoObserver = new IntersectionObserver(
                 (entries, observer) => {
-                    entries.forEach(function(video) {
+                    entries.forEach((video: any) => {
                         if (video.isIntersecting) {
                             for (const source in video.target.children) {
-                                const videoSource =
+                                const videoSource: any =
                                     video.target.children[source];
                                 if (videoSource.tagName === 'SOURCE') {
                                     videoSource.src = videoSource.dataset.src;

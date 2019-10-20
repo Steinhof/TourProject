@@ -1,9 +1,22 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WebpackNotifierPlugin = require('webpack-notifier');
 const Fibers = require('fibers');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+
+const threadLoader = require('thread-loader');
+
+/* Pre warming, this boots the max number of workers in the pool */
+threadLoader.warmup(
+    {
+        // pool options, like passed to loader options
+        // must match loader options to boot the correct pool
+    },
+    [
+        // modules to load
+        // can be any module, i. e.
+        'css-loader',
+        'sass-loader',
+    ],
+);
 
 // Settings
 const cfg = require('./config/config');
@@ -39,18 +52,27 @@ module.exports = {
                             experimentalWatchApi: true,
                         },
                     },
+                    // 'babel-loader', /* For IE11 development */
                 ],
                 include: path.resolve('src'),
             },
             {
                 test: /\.(sa|sc|c)ss$/,
+                exclude: /node_modules/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        // Performance depends on the project [see: https://blog.johnnyreilly.com/search?updated-max=2019-01-05T20:02:00Z&max-results=1&start=14&by-date=false ]
+                        loader: 'thread-loader',
+                        options: {
+                            // there should be 1 cpu for the fork-ts-checker-webpack-plugin
+                            workers: require('os').cpus().length - 1,
+                        },
+                    },
+                    'style-loader',
                     'css-loader',
                     {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: true,
                             sassOptions: {
                                 implementation: require('sass'),
                                 fiber: Fibers,
@@ -65,23 +87,6 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: cfg.files.template,
-        }),
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-            chunkFilename: 'css/[id].css',
-            ignoreOrder: false, // Enable to remove warnings about conflicting order
-        }),
-        new BrowserSyncPlugin({
-            host: 'localhost',
-            port: 3001,
-            proxy: 'http://localhost:3000/',
-            open: false,
-            notify: false,
-        }),
-        new WebpackNotifierPlugin({
-            excludeWarnings: false,
-            sound: true,
-            wait: true,
         }),
     ],
 };

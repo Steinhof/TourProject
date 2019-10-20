@@ -1,0 +1,9 @@
+{
+  "title": "Natours project",
+  "source": [
+    "./src/client/sass/"
+  ],
+  "destination": "./docs",
+  "css": ["../src/public/css/main.css"],
+  "js": ["../src/public/js/main.js"]
+}

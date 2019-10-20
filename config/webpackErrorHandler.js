@@ -14,6 +14,8 @@ function webpackErrorHandler(err, stats) {
         colors: true,
         modules: false,
         errors: true,
+        publicPath: false,
+        timings: true,
         cachedAssets: true,
         /* Stat logs */
         warnings: true,
@@ -23,9 +25,7 @@ function webpackErrorHandler(err, stats) {
     };
 
     // Result (you can choose stats preset)
-    console.log(
-        `${stats.toString(statsConfig)} -- ${new Date().toLocaleTimeString()}`,
-    );
+    console.log(stats.toString(statsConfig));
 }
 
 module.exports = webpackErrorHandler;

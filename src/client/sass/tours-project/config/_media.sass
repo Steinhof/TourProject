@@ -1,0 +1,26 @@
+// -----------------------------------------------------------------------------
+// MEDIA QUERY MANAGER
+// -----------------------------------------------------------------------------
+
+/* 0 - 600px		Phone
+ * 600 - 900px		Tablet portrait
+ * 900 - 1200px		Tablet landscape //tablet
+ * 1200 - 1800 		Desktop //desktop
+ * 1800px + 		Big desktop //big desktop
+ */
+
+/* ORDER: Base + typography > general layout + grid > page layout > components */
+
+/* breakpoints: ( (EM for compatibility)
+ *	phone: 37.5em -- 600px (600px / 16 px = 37.5em)
+ *	tablet: 56.25em -- 900px
+ *	desktop: 75em -- 1200px
+ *	big-desktop: 112.5em -- min 1800px
+ *	) !default
+ */
+
+/* Includes intervals between media queries like: 37.49em | 37.52em ...
+
+$breakpoints: ("phone": 37.5em, "tablet": 56.25em, "desktop": 75em, "big-desktop": 112.5em)
+
+$media-expressions: ("screen": "screen", "print": "print", "handheld": "handheld", "landscape": "(orientation: landscape)", "portrait": "(orientation: portrait)", "retina2x": "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)", "retina3x": "(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx)", "ie11": "(-ms-high-contrast: none), (-ms-high-contrast: active)")

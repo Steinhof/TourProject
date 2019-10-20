@@ -1,0 +1,94 @@
+// -----------------------------------------------------------------------------
+// STORY COMPONENT
+// -----------------------------------------------------------------------------
+
+
+//Story
+//
+//Round image with blur effect and floating text
+//
+//Markup:
+//<div class="story">
+//            <figure class="story__shape">
+//                <img class="story__image lazyload" data-src="img/nat-9.png" alt="Jack London personal story"
+//                     loading="lazy">
+//                <figcaption class="story__caption">Jack London</figcaption>
+//            </figure>
+//            <div class="story__text">
+//                <h3 class="heading-3">This says a lot about our society</h3>
+//                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad atque corporis deserunt temporibus.
+//                    Accusamus eligendi esse, est explicabo fugiat, in, ipsa laborum nihil omnis perferendis qui
+//                    reiciendis reprehenderit vel veritatis?</p>
+//            </div>
+//        </div>
+//
+//
+//Styleguide Components.Story
+
+.story
+	width: 75%
+	margin: 0 auto
+	padding: 6rem 9rem 6rem
+	font-size: $default-font-size
+	background-color: rgba($color-white, 0.6)
+	border-radius: 3px
+	box-shadow: 0 3rem 6rem rgba($color-black, 0.1)
+	transform: skewX(-12deg)
+
+	&:hover .story__caption
+		transform: translate(-50%, -50%)
+		opacity: 1
+
+	&:hover .story__image
+		filter: blur(3px)
+
+	+media('<tablet')
+		width: 100%
+		padding: 1rem
+
+	+media('<phone')
+		transform: skewX(0)
+
+
+.story__shape
+	float: left
+	width: 15rem
+	height: 15rem
+	overflow: hidden
+	border-radius: 50%
+	//or clip-path circle
+	transform: skewX(12deg)
+
+	@supports (clip-path: circle())
+		clip-path: circle(50% at 50% 50%)
+		shape-outside: circle(50% at 50% 50%)
+		border-radius: 0
+
+	+media('<phone')
+		transform: skewX(0)
+
+
+.story__image
+	transform: scale(2)
+	transition: all 0.5s
+
+
+.story__text
+	transform: skewX(12deg)
+
+	+media('<tablet')
+		transform: translateX(0)
+
+
+.story__caption
+	position: absolute
+	top: 50%
+	left: 50%
+	color: $color-white
+	font-size: 1.7rem
+	text-align: center
+	text-transform: uppercase
+	transform: translate(-50%, 20%)
+	opacity: 0
+	transition: all 0.5s
+

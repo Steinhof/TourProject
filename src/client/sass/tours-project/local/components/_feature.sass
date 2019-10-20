@@ -1,0 +1,38 @@
+// -----------------------------------------------------------------------------
+// FEATURE
+// -----------------------------------------------------------------------------
+
+/*
+ Feature
+
+ Feature box with icon from sprites and some text
+
+ Markup:
+ <div class="feature-box">
+                <div class="feature-box__icon--world"></div>
+                <h3 class="heading-tertiary">Explore the world</h3>
+                <p class="feature-box__text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad id iste libero necessitatibus
+                    voluptatem.
+                </p>
+            </div>
+
+ Styleguide Components.Feature
+ */
+.feature-box
+	padding: 3rem
+	text-align: center
+	background-color: rgba($color-white, 0.8)
+	+font-size(1.5rem)
+	border-radius: 3px
+	box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15)
+	transition: transform 0.3s
+
+	&:hover
+		transform: translateY(-1.5rem) scale(1.03)
+
+
+
+
+
+

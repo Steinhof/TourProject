@@ -10,6 +10,8 @@ SPECIFIC STYLES
 7. Styles in html order
 8. Ignore !important
 9. // for sections and /* */ for comments
+10. No context selectors
+11. Don't split complex modules without need
 
 
         * CSS SIZES *
@@ -31,5 +33,6 @@ SPECIFIC STYLES
 4. Section > Section styles > next
 5. Create only the necessary elements
 6. Semantic element > div element
+7. NAME__MODULE__MOD
 
         * TS *

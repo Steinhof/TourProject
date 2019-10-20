@@ -26,24 +26,14 @@ module.exports = {
         // libraryTarget: 'commonjs2', // To make the library compatible with other environments
     },
     resolve: {
-        extensions: ['.ts', '.js', '.css', '.sass', '.html'],
+        extensions: ['.ts', '.js', '.css', '.sass'],
     },
     module: {
         rules: [
             {
                 test: /\.ts$/,
-                use: [
-                    'cache-loader',
-                    {
-                        loader: 'ts-loader',
-                        options: {
-                            happyPackMode: true,
-                            transpileOnly: true,
-                            configFile: cfg.configs.ts.build,
-                        },
-                    },
-                    'babel-loader',
-                ],
+                use: ['cache-loader', 'babel-loader'],
+                include: path.resolve('src'),
             },
             {
                 test: /\.(sa|sc|c)ss$/,
@@ -56,6 +46,7 @@ module.exports = {
                         },
                     },
                     'postcss-loader',
+                    'group-css-media-queries-loader',
                     {
                         loader: 'sass-loader',
                         options: {
@@ -91,7 +82,6 @@ module.exports = {
         }),
         new webpack.HashedModuleIdsPlugin(),
         new HtmlWebpackPlugin({
-            filename: 'index.html',
             template: cfg.files.template,
             minify: {
                 removeComments: true,

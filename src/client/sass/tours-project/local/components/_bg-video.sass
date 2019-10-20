@@ -1,0 +1,47 @@
+// -----------------------------------------------------------------------------
+// BACKGROUND VIDEO
+// -----------------------------------------------------------------------------
+
+/*
+ Background Video
+
+ Displays video as full background
+
+ Markup:
+ <div class="bg-video">
+        <video class="bg-video__content lazyload" autoplay muted loop poster="img/video--poster.png">
+            <source data-src="img/video.mp4" media="(min-width: 768px)" type="video/mp4; codecs=av01.0.05M.08">
+            <source data-src="img/video.webm" media="(min-width: 768px)" type="video/webm">
+            Your browser is not supported!
+        </video>
+    </div>
+
+ Styleguide Components.BackgroundVideo
+ */
+
+.bg-video
+	position: absolute
+	top: 0
+	left: 0
+	z-index: $z-lower-priority
+	width: 100%
+	height: 100%
+	overflow: hidden
+	opacity: 0.15
+
+	+media('<phone')
+		background-image: url("/img/video--poster.png")
+		background-size: cover
+		background-repeat: no-repeat
+
+
+.bg-video__content
+	width: 100%
+	height: 100%
+	object-fit: cover
+
+	+media('ie11')
+		width: auto
+
+	+media('<phone')
+		display: none
