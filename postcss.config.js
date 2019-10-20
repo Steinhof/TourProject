@@ -12,7 +12,6 @@ module.exports = {
                 'nesting-rules': true, // Nesting selectors
             },
         }),
-        require('postcss-easing-gradients'),
         cssnano({
             preset: [
                 'advanced',
